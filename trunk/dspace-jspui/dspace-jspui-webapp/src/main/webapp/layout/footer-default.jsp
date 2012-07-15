@@ -74,13 +74,13 @@
                 </form>
             </div>
             <div>
-                    <span class="thongbao">ĐỂ NHẬN MÃ DOWNLOAD, MỜI BẠN SOẠN TIN THEO CÚ PHÁP </span>
-                    <span class="tukhoa">IPC IT </span>
-                    <span class="thongbao">gửi</span> 
-                    <span class="dauso">
-                        8517
-                        <span class="phitn">(5000 đ/1 tin nhắn)</span>
-                    </span>
+                <span class="thongbao">ĐỂ NHẬN MÃ DOWNLOAD, MỜI BẠN SOẠN TIN THEO CÚ PHÁP </span>
+                <span class="tukhoa">IPC IT </span>
+                <span class="thongbao">gửi</span> 
+                <span class="dauso">
+                    8517
+                    <span class="phitn">(5000 đ/1 tin nhắn)</span>
+                </span>
             </div>
         </div>
     </div>
@@ -141,7 +141,7 @@
             </script>
             <!-- Histats.com  START  (standard)-->
             <script >
-                            document.write(unescape("%3Cscript src=%27http://s10.histats.com/js15.js%27 type=%27text/javascript%27%3E%3C/script%3E"));</script>
+                document.write(unescape("%3Cscript src=%27http://s10.histats.com/js15.js%27 type=%27text/javascript%27%3E%3C/script%3E"));</script>
             <a href="http://www.histats.com" target="_blank" title="site stats" >
                 <script   >
                     try {Histats.start(1,1884414,4,407,118,80,"00011011");
