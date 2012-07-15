@@ -360,6 +360,10 @@
         <servlet-name>create-comment</servlet-name>
         <servlet-class>org.dspace.app.webui.servlet.CommentServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>otp-check</servlet-name>
+        <servlet-class>org.dspace.app.webui.servlet.OtpServlet</servlet-class>
+    </servlet>
     <!--Serverlet mapping-->
     <servlet-mapping>
         <servlet-name>shibboleth-login</servlet-name>

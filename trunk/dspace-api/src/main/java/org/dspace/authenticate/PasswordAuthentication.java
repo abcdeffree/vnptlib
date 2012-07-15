@@ -263,7 +263,7 @@ public class PasswordAuthentication
                             HttpServletResponse response)
     {
         return response.encodeRedirectURL(request.getContextPath() +
-                                          "/password-login");
+                                          "/cas-login");
     }
 
     /**

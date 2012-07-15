@@ -158,11 +158,7 @@
                         %>
                         <li>
                             <img  class="nav_a_login" src="<%= request.getContextPath()%>/image/transparent.gif"/>
-                            <a href="<%= request.getContextPath()%>/password-login"><fmt:message key="jsp.components.login-form.login"/></a>
-                        </li>
-                        <li>
-                            <img  class="nav_a_register" src="<%= request.getContextPath()%>/image/transparent.gif"/>
-                            <a href="<%= request.getContextPath()%>/register">Đăng ký</a>
+                            <a href="<%= request.getContextPath()%>/cas-login"><fmt:message key="jsp.components.login-form.login"/></a>
                         </li>
                         <%
                             }
