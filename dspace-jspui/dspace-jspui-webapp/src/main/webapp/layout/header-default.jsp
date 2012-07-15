@@ -124,23 +124,23 @@
             jQuery.noConflict();
         </script>
         <script src="<%= request.getContextPath()%>/utils.js"></script>
-            <script src="http://www.google.com/jsapi"></script> 
-    <script> 
+        <script src="http://www.google.com/jsapi"></script> 
+        <script> 
             google.setOnLoadCallback(function() {
                 // Place init code here instead of $(document).ready()
             });
-    </script>
+        </script>
     </head>
 
     <%-- HACK: leftmargin, topmargin: for non-CSS compliant Microsoft IE browser --%>
     <%-- HACK: marginwidth, marginheight: for non-CSS compliant Netscape browser --%>
     <body>
         <div class="maincontent">
-        <%-- DSpace top-of-page banner --%>
-        <%-- HACK: width, border, cellspacing, cellpadding: for non-CSS compliant Netscape, Mozilla browsers --%>
-        <div class="divpageBanner">
-            <div class="divuser">
-                <ul>
+            <%-- DSpace top-of-page banner --%>
+            <%-- HACK: width, border, cellspacing, cellpadding: for non-CSS compliant Netscape, Mozilla browsers --%>
+            <div class="divpageBanner">
+                <div class="divuser">
+                    <ul>
                         <%
                             if (user != null) {
                         %>
@@ -167,13 +167,14 @@
                         <%
                             }
                         %>
-                    <li>
-                        <img  class="nav_a_help" src="<%= request.getContextPath()%>/image/transparent.gif"/>
-                        <dspace:popup page="<%= LocaleSupport.getLocalizedMessage(pageContext, 
+                        <li>
+                            <img  class="nav_a_help" src="<%= request.getContextPath()%>/image/transparent.gif"/>
+                            <dspace:popup page="<%= LocaleSupport.getLocalizedMessage(pageContext, 
                     
+                            
                             \"help.index\")%>"><fmt:message key="jsp.layout.navbar-default.help"/></dspace:popup>
-                    </li>
-                        
+                            </li>
+
                         <%
                             if (isAdmin) {
                         %>  
@@ -184,103 +185,103 @@
                         <%
                             }
                         %>
+                        <%
+                            if (user != null) {
+                        %>
+                        <li>
+                            <img  class="nav_a_logout" src="<%= request.getContextPath()%>/image/transparent.gif"/>
+                            <a href="<%= request.getContextPath()%>/logout"><fmt:message key="jsp.layout.navbar-default.logout"/></a>
+                        </li>
+                        <%}%>
+                    </ul>
+                </div>
+                <div class="divformsearch">
+                    <form method="get" action="<%= request.getContextPath()%>/simple-search">
+                        <%-- <input type="text" name="query" id="tequery" size="10"/><input type=image border="0" src="<%= request.getContextPath() %>/image/search-go.gif" name="submit" alt="Go" value="Go"/> --%>
+                        <input type="text" name="query" id="tequery" />
+                        <input type="submit" name="submit" class="inputformsearch" value=""/>
+                        <a href="<%= request.getContextPath()%>/advanced-search"><fmt:message key="jsp.layout.navbar-default.advanced"/></a>
+                        <%
+                            if (ConfigurationManager.getBooleanProperty("webui.controlledvocabulary.enable")) {
+                        %>        
+                        <br/><a href="<%= request.getContextPath()%>/subject-search"><fmt:message key="jsp.layout.navbar-default.subjectsearch"/></a>
+                        <%
+                            }
+                        %>
+                    </form>
+                </div>
+                <div class="divtitlepage">
+                    <span>THƯ VIỆN SỐ</span>
+                </div>
+            </div>
+            <div class="nav">
+                <ul id="navid" class="nav fl">
+                    <li>
+                        <a href="<%= request.getContextPath()%>/" class="nav-home">
+                            <span class="a_nav_home"><fmt:message key="jsp.layout.navbar-default.home"/></span>
+                        </a>    
+                    </li>
+                    <li>
+                        <a href="<%= request.getContextPath()%>/category" class="nav-community-list">
+                            <span><fmt:message key="jsp.layout.navbar-default.communities-collections"/></span>
+                        </a>
+                    </li>
                     <%
-                    if (user != null) {
+                        for (int i = 0; i < bis.length - 1; i++) {
+                            BrowseIndex bix = bis[i];
+                            String key = "browse.menu." + bix.getName();
                     %>
                     <li>
-                        <img  class="nav_a_logout" src="<%= request.getContextPath()%>/image/transparent.gif"/>
-                        <a href="<%= request.getContextPath()%>/logout"><fmt:message key="jsp.layout.navbar-default.logout"/></a>
+                        <a href="<%= request.getContextPath()%>/browse?type=<%= bix.getName()%>" class="nav-<%= bix.getName()%>">
+                            <span><fmt:message key="<%= key%>"/></span>
+                        </a>
                     </li>
-                    <%}%>
-                </ul>
-            </div>
-            <div class="divformsearch">
-                <form method="get" action="<%= request.getContextPath()%>/simple-search">
-                    <%-- <input type="text" name="query" id="tequery" size="10"/><input type=image border="0" src="<%= request.getContextPath() %>/image/search-go.gif" name="submit" alt="Go" value="Go"/> --%>
-                    <input type="text" name="query" id="tequery" />
-                    <input type="submit" name="submit" class="inputformsearch" value=""/>
-                    <a href="<%= request.getContextPath()%>/advanced-search"><fmt:message key="jsp.layout.navbar-default.advanced"/></a>
-                    <%
-                        if (ConfigurationManager.getBooleanProperty("webui.controlledvocabulary.enable")) {
-                    %>        
-                    <br/><a href="<%= request.getContextPath()%>/subject-search"><fmt:message key="jsp.layout.navbar-default.subjectsearch"/></a>
                     <%
                         }
                     %>
-                </form>
+                    <li>
+                        <%
+                            if (isAdmin) {
+                        %>  
+                        <a href="<%= request.getContextPath()%>/dspace-admin" class="nav-dspace-admin">
+                            <span><fmt:message key="jsp.administer"/></span>
+                        </a>
+                        <%
+                            }
+                        %>
+                    </li>
+                </ul>
             </div>
-            <div class="divtitlepage">
-                <span>THƯ VIỆN SỐ</span>
-            </div>
-        </div>
-        <div class="nav">
-            <ul id="navid" class="nav fl">
-                <li>
-                    <a href="<%= request.getContextPath()%>/" class="nav-home">
-                        <span class="a_nav_home"><fmt:message key="jsp.layout.navbar-default.home"/></span>
-                    </a>    
-                </li>
-                <li>
-                    <a href="<%= request.getContextPath()%>/category" class="nav-community-list">
-                        <span><fmt:message key="jsp.layout.navbar-default.communities-collections"/></span>
-                    </a>
-                </li>
+
+            <%-- Localization --%>
+            <%--  <c:if test="${param.locale != null}">--%>
+            <%--   <fmt:setLocale value="${param.locale}" scope="session" /> --%>
+            <%-- </c:if> --%>
+            <%--        <fmt:setBundle basename="Messages" scope="session"/> --%>
+
+            <%-- Page contents --%>
+
+            <%-- HACK: width, border, cellspacing, cellpadding: for non-CSS compliant Netscape, Mozilla browsers --%>
+            <div style="clear: both"></div>
+            <div class="divcontent">
+
+                <%-- HACK: valign: for non-CSS compliant Netscape browser --%>
+                <%-- Navigation bar --%>
                 <%
-                    for (int i = 0; i < bis.length-1; i++) {
-                        BrowseIndex bix = bis[i];
-                        String key = "browse.menu." + bix.getName();
+                    if (!navbar.equals("off") && navbar.indexOf("admin") > -1) {
                 %>
-                <li>
-                    <a href="<%= request.getContextPath()%>/browse?type=<%= bix.getName()%>" class="nav-<%= bix.getName()%>">
-                        <span><fmt:message key="<%= key%>"/></span>
-                    </a>
-                </li>
+                <div class="divnavbar">
+                    <dspace:include page="<%= navbar%>" />
+                </div>
                 <%
                     }
                 %>
-                <li>
-                    <%
-                        if (isAdmin) {
-                    %>  
-                    <a href="<%= request.getContextPath()%>/dspace-admin" class="nav-dspace-admin">
-                        <span><fmt:message key="jsp.administer"/></span>
-                    </a>
-                    <%
-                        }
-                    %>
-                </li>
-            </ul>
-        </div>
-
-        <%-- Localization --%>
-        <%--  <c:if test="${param.locale != null}">--%>
-        <%--   <fmt:setLocale value="${param.locale}" scope="session" /> --%>
-        <%-- </c:if> --%>
-        <%--        <fmt:setBundle basename="Messages" scope="session"/> --%>
-
-        <%-- Page contents --%>
-
-        <%-- HACK: width, border, cellspacing, cellpadding: for non-CSS compliant Netscape, Mozilla browsers --%>
-        <div style="clear: both"></div>
-        <div class="divcontent">
-                
-                <%-- HACK: valign: for non-CSS compliant Netscape browser --%>
-                    <%-- Navigation bar --%>
-                    <%
-                        if (!navbar.equals("off") && navbar.indexOf("admin") > -1) {
-                    %>
-                    <div class="divnavbar">
-                        <dspace:include page="<%= navbar%>" />
-                    </div>
-                    <%
-                        }
-                    %>
-                    <%-- Page Content --%>
-                    <div class="divpagecontent">
-                        <div class="divmargin">
-                    <%-- HACK: width specified here for non-CSS compliant Netscape 4.x --%>
-                    <%-- HACK: Width shouldn't really be 100%, but omitting this means --%>
-                    <%--       navigation bar gets far too wide on certain pages --%>
+                <%-- Page Content --%>
+                <div class="divpagecontent">
+                    <div class="divmargin">
+                        <%-- HACK: width specified here for non-CSS compliant Netscape 4.x --%>
+                        <%-- HACK: Width shouldn't really be 100%, but omitting this means --%>
+                        <%--       navigation bar gets far too wide on certain pages --%>
                         <%-- Location bar --%>
                         <%
                             if (locbar) {

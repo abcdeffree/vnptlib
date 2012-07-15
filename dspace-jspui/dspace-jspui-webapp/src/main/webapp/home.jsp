@@ -69,7 +69,7 @@
                     <%
                         if (ConfigurationManager.getBooleanProperty("webui.strengths.show")) {
                     %>
-                    <span class="count">[<%= ic.getCount(communities[i])%>]</span>
+                    <!--<span class="count">[<%//= ic.getCount(communities[i])%>]</span> -->
                     <%
                         }
 
@@ -90,7 +90,7 @@
                     <%
                         if (ConfigurationManager.getBooleanProperty("webui.strengths.show")) {
                     %>
-                    <span class="count">[<%= ic.getCount(communities[i])%>]</span>
+                    <!--span class="count">[<%//= ic.getCount(communities[i])%>]</span-->
                     <%
                         }
 
@@ -180,10 +180,12 @@
                             }
                         }
                     %>
+        <div class="div_box_subbar_content_footer"></div>
     </div>
     <%-- Recently Submitted items --%>
     <div class="div_box_subbar fl">
         <h3><img  class="nav_home_h3" src="<%= request.getContextPath()%>/image/author.png"/>Các tác giả<a href="<%= request.getContextPath()%>/browse?type=author" class="a_recentItem_more">Xem thêm<img  class="image_recentitem_more" src="./image/transparent.gif"/></a></h3>
+        <div class="div_box_subbar_content">
                 <%
                     // prepare the next and previous links
                     String linkBase = request.getContextPath() + "/";
@@ -197,10 +199,13 @@
             <%
                 }
             %>
+        <div class="div_box_subbar_content_footer"></div>
+        </div>
     </div>
     <%-- Recently Submitted items --%>
     <div class="div_box_subbar fr">
         <h3><img  class="nav_home_h3" src="<%= request.getContextPath()%>/image/subject.png"/>Các chủ đề<a href="<%= request.getContextPath()%>/browse?type=subject" class="a_recentItem_more">Xem thêm<img  class="image_recentitem_more" src="./image/transparent.gif"/></a></h3>
+        <div class="div_box_subbar_content">
                 <%
                     sharedLink = linkBase + "browse?type=" + URLEncoder.encode("subject");
                     // Row: toggles between Odd and Even
@@ -212,11 +217,13 @@
             <%
                 }
             %>
+        <div class="div_box_subbar_content_footer"></div>
+        </div>
     </div>
     <dspace:sidebar>
         <%= sideNews%>
         <div class="div_box_rightbar">
-            <h3><img  class="nav_home_h3" src="<%= request.getContextPath()%>/image/document_good.png"/>Các tài liệu nhiều người dùng </h3>
+            <h3><img  class="nav_home_h3" src="<%= request.getContextPath()%>/image/document_good.png"/>Tài liệu nhiều người dùng </h3>
                 <%
                     RecentSubmissions rsdateissued = (RecentSubmissions) request.getAttribute("recently.submitted.dateissued");
                     if (rsdateissued != null) {

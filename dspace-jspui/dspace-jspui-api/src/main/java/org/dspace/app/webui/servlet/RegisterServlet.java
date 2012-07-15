@@ -207,7 +207,8 @@ public class RegisterServlet extends DSpaceServlet
             SQLException, AuthorizeException
     {
         String email = request.getParameter("email");
-        if (email == null || email.length() > 64 || verifyEmailLocal(email))
+//        if (email == null || email.length() > 64 || verifyEmailLocal(email))
+        if (email == null || email.length() > 64)
         {
         	// Malformed request or entered value is too long.
         	email = "";
