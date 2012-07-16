@@ -8,11 +8,7 @@ package org.dspace.app.webui.servlet;
  *
  * @author ThucLH
  */
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.SQLException;
 import java.util.Date;
 
@@ -51,49 +47,40 @@ public class OtpServlet extends DSpaceServlet {
      */
     private static Logger log = Logger.getLogger(CommentServlet.class);
 
+    @Override
     protected void doDSGet(Context context, HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException,
             SQLException, AuthorizeException {
         int item_id = UIUtil.getIntParameter(request, "item_id");
-        String handle = request.getParameter("handle");
-        String content = request.getParameter("content");
-        if (item_id == -1 || content == null) {
-            response.sendRedirect(request.getContextPath());
-        }
-        EPerson currentUser = context.getCurrentUser();
+        String otp_content = request.getParameter("otp");
+        if (item_id == -1) {
+            response.setContentType("application/json");
+            // Get the printwriter object from response to write the required json object to the output stream      
+            PrintWriter out = response.getWriter();
+            // Assuming your json object is **jsonObject**, perform the following, it will return your json object  
+            out.print("{status: true, url: 'url'}");
+            out.flush();
+//            response.sendRedirect(request.getContextPath());
+        } else {
+//        EPerson currentUser = context.getCurrentUser();
 
-        Comment comment = Comment.create(context);
-        comment.setMetadata("content", content);
-        comment.setInteger("item_id", item_id);
-        comment.setInteger("user_id", currentUser.getID());
-        comment.setTimestamp("created_at", new Date());
-        comment.update();
-        context.complete();
-        response.sendRedirect(response.encodeRedirectURL(request.getContextPath()
-                + "/handle/" + handle));
+            Otp otp = Otp.findByOtp(context, otp_content);
+            otp.setInteger("is_active", 0);
+            otp.update();
+            context.complete();
+
+            response.setContentType("application/json");
+            // Get the printwriter object from response to write the required json object to the output stream      
+            PrintWriter out = response.getWriter();
+            // Assuming your json object is **jsonObject**, perform the following, it will return your json object  
+            out.print("{status: true, url: 'url'}");
+            out.flush();
+        }
     }
 
+    @Override
     protected void doDSPost(Context context, HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException,
             SQLException, AuthorizeException {
-
-        int item_id = UIUtil.getIntParameter(request, "item_id");
-        String handle = request.getParameter("handle");
-        String content = request.getParameter("content");
-        if (item_id == -1 || content == null) {
-            response.sendRedirect(request.getContextPath());
-        }
-        EPerson currentUser = context.getCurrentUser();
-
-        Comment comment = Comment.create(context);
-        comment.setMetadata("content", content);
-        comment.setInteger("item_id", item_id);
-        comment.setInteger("user_id", currentUser.getID());
-        comment.setTimestamp("created_at", new Date());
-        comment.update();
-        context.complete();
-        response.sendRedirect(response.encodeRedirectURL(request.getContextPath()
-                + "/handle/" + handle));
-
     }
 }

@@ -167,6 +167,7 @@
 %>
     <dspace:item-preview item="<%= item %>" />
     <dspace:item item="<%= item %>" collections="<%= collections %>" style="<%= displayStyle %>" isAdmin="<%=isAdmin%>"/>
+    <% if(user != null){%>
     <div align="center" class="div_create_comment">
         <p class="title_comment"><strong>Nhận xét về tài liệu:</strong></p>
         <form method="post" action="<%= request.getContextPath() %>/comment/create" method="post">
@@ -175,7 +176,9 @@
             <div class="comment_user_name">
                 <div class="comment_user_img">
                     <img class="comment_img_top" src="<%= request.getContextPath()%>/image/person-icon.png" alt="">
+                    
                     <a class="actorName" href="<%= request.getContextPath() %>/profile"><%=user.getFullName()%></a>
+                    
                 </div>
                 <div class="div_comment_input">
                     <textarea name="content" class="comment_input"></textarea>   
@@ -184,6 +187,7 @@
             <input type="submit" name="submit_comment" value="Nhận xét" class="share_button"/>
         </form>
     </div>
+                    <%}%>
     <div style="clear: both"></div>
     <div class="div_view_comment">
         <% if(comments.length != 0){

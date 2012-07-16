@@ -45,17 +45,6 @@
         </li>
     </ul>
 </div>
-<div class="div_box_rightbar">
-    <h3><img  class="nav_home_h3" src="<%= request.getContextPath()%>/image/soft_help.png"/>Các phần mềm hỗ trợ</h3>
-    <ul>
-        <li><a href="<%= request.getContextPath()%>/resources/unikey40RC2-1101-win32.zip"><img alt="" src="<%= request.getContextPath()%>/image/soft/unikey.png">UniKey</a><p>Bộ gõ Tiếng Việt miễn phí</p></li>
-        <li><a href="<%= request.getContextPath()%>/resources/abc-vni-font.zip"><img alt="" src="<%= request.getContextPath()%>/image/soft/font.png">Font ABC-VNI</a><p>Bộ Font ABC - VNI thông dụng</p></li>	
-        <li><a href="<%= request.getContextPath()%>/resources/WinRAR.v3.91.Incl.Keyfilemaker-CORE.zip"><img alt="" src="<%= request.getContextPath()%>/image/soft/WinRAR.png">WinRAR</a><p>Soft nén và giải nén mạnh</p></li>
-        <li><a href="<%= request.getContextPath()%>/resources/flashget-en.exe"><img alt="" src="<%= request.getContextPath()%>/image/soft/flashget.png">Flashget v3.3</a><p>Trình hỗ trợ tăng tốc download files</p></li>
-        <li><a target="blank" href="http://www.mozilla.org/vi/firefox/new/"><img alt="" src="<%= request.getContextPath()%>/image/soft/firefox.png">Mozilla Firefox</a><p>Trình duyệt Web nhanh nhất</p></li>
-        <li><a href="http://cdn01.foxitsoftware.com/pub/foxit/reader/desktop/win/5.x/5.1/enu/FoxitReader510.1021_enu_Setup.exe"><img alt="" src="<%= request.getContextPath()%>/image/soft/foxitreader.png">Foxit Reader 5</a><p>Xem PDF miễn phí</p></li>														
-    </ul>
-</div>
 <%
     boolean feedEnabled = ConfigurationManager.getBooleanProperty("webui.feed.enable");
     if (feedEnabled) {
