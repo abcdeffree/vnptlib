@@ -51,9 +51,9 @@
 %>
 
 <dspace:layout locbar="nolink" titlekey="jsp.home.title">
-    <!--    <div class="div_top_new">
-    <%//= topNews%>
-</div>-->
+    <div class="div_top_new">
+        <%= sideNews%>
+    </div>
     <div class="div_toppage_content">
         <%
             if (communities.length != 0) {
@@ -129,10 +129,13 @@
                                 }
                             }
                             DCValue[] dcdes = items[i].getMetadata("dc", "description", null, Item.ANY);
-                            String description = "Không có mô tả";
+                            String description = "";
                             if (dcdes != null) {
                                 if (dcdes.length > 0) {
                                     description = dcdes[0].value;
+                                    if(description.length() > 200){
+                                        description = description.substring(0, 200)+"...";
+                                    }
                                 }
                             }
                             
@@ -182,46 +185,9 @@
                     %>
         <div class="div_box_subbar_content_footer"></div>
     </div>
-    <%-- Recently Submitted items --%>
-    <div class="div_box_subbar fl">
-        <h3><img  class="nav_home_h3" src="<%= request.getContextPath()%>/image/author.png"/>Các tác giả<a href="<%= request.getContextPath()%>/browse?type=author" class="a_recentItem_more">Xem thêm<img  class="image_recentitem_more" src="./image/transparent.gif"/></a></h3>
-        <div class="div_box_subbar_content">
-                <%
-                    // prepare the next and previous links
-                    String linkBase = request.getContextPath() + "/";
-                    String sharedLink = linkBase + "browse?type=" + URLEncoder.encode("author");
-                    // Row: toggles between Odd and Even
-                    String[][] results = (String[][]) request.getAttribute("recently.submitted.author");
-
-                    for (int i = 0; i < results.length; i++) {
-                %>
-        <p class="recentItem"><img  class="a_recentauthor" src="<%= request.getContextPath()%>/image/transparent.gif"/><a href="<%= sharedLink%><% if (results[i][1] != null) {%>&amp;authority=<%= URLEncoder.encode(results[i][1], "UTF-8")%>">results[i][0]%></a> <% } else {%>&amp;value=<%= URLEncoder.encode(results[i][0], "UTF-8")%>"><%= results[i][0]%></a> <% }%></p>
-            <%
-                }
-            %>
-        <div class="div_box_subbar_content_footer"></div>
-        </div>
-    </div>
-    <%-- Recently Submitted items --%>
-    <div class="div_box_subbar fr">
-        <h3><img  class="nav_home_h3" src="<%= request.getContextPath()%>/image/subject.png"/>Các chủ đề<a href="<%= request.getContextPath()%>/browse?type=subject" class="a_recentItem_more">Xem thêm<img  class="image_recentitem_more" src="./image/transparent.gif"/></a></h3>
-        <div class="div_box_subbar_content">
-                <%
-                    sharedLink = linkBase + "browse?type=" + URLEncoder.encode("subject");
-                    // Row: toggles between Odd and Even
-                    String[][] subjectresults = (String[][]) request.getAttribute("recently.submitted.subject");
-
-                    for (int i = 0; i < subjectresults.length; i++) {
-                %>
-        <p class="recentItem"><img  class="a_recentsubject" src="<%= request.getContextPath()%>/image/transparent.gif"/><a href="<%= sharedLink%><% if (subjectresults[i][1] != null) {%>&amp;authority=<%= URLEncoder.encode(subjectresults[i][1], "UTF-8")%>">subjectresults[i][0]%></a> <% } else {%>&amp;value=<%= URLEncoder.encode(subjectresults[i][0], "UTF-8")%>"><%= subjectresults[i][0]%></a> <% }%></p>
-            <%
-                }
-            %>
-        <div class="div_box_subbar_content_footer"></div>
-        </div>
-    </div>
     <dspace:sidebar>
-        <%= sideNews%>
+        <embed height="349" width="240" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" 
+               src="/dspace/image/vnptipc.swf" play="true" loop="true" menu="true">
         <div class="div_box_rightbar">
             <h3><img  class="nav_home_h3" src="<%= request.getContextPath()%>/image/document_good.png"/>Tài liệu nhiều người dùng </h3>
                 <%

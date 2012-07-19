@@ -91,9 +91,8 @@
     <div class="div_box_footer">
         <div class="div_box_footer_intro">
             <p class="footer_title">TẬP ĐOÀN BƯU CHÍNH VIỄN THÔNG VIỆT NAM</p>
-            <p>Giấy phép 6xx/GP - INTER BVHTT - Quản lý phát triển: Nguyễn Tuấn Anh</p>
-            <p>Đơn vị thực hiện: Trung tâm Thông tin và Quan hệ công chúng - 57 Huỳnh Thúc Kháng - Hà Nội</p>
-            <p>Mọi thắc mắc xin liên hệ quản trị website: Nguyễn Tuấn Mạnh - 0915 038 868 - Email: <a href="mailto: manhnt@vnpt.vn" style="color: #666">manhnt@vnpt.vn</a></p>
+            <p>Đơn vị phát triển: Trung tâm Thông tin và Quan hệ công chúng - 57 Huỳnh Thúc Kháng - Hà Nội</p>
+            <p>Mọi thắc mắc xin liên hệ: Nguyễn Tuấn Mạnh - 0915 038 868 - Email: <a href="mailto: manhnt@vnpt.vn" style="color: #666">manhnt@vnpt.vn</a></p>
         </div>
         <div class="div_box_counter">
             <script  >
