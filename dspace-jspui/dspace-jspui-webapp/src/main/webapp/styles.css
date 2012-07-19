@@ -1491,7 +1491,7 @@ div.xbreadcrumbs-border {
     border-radius: 4px;
 }
 .div_box_subbar_content_footer{
-    background: url('image/home_footer_center.jpg') repeat-x scroll center top transparent;
+/*    background: url('image/home_footer_center.jpg') repeat-x scroll center top transparent;*/
     height: 17px;
 }
 .div_box_subbar h3{
