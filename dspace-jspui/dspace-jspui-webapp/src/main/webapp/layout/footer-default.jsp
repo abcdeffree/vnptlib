@@ -60,31 +60,6 @@
     </div>
 </div>
 <%}%>
-<div style="clear: both"></div>
-<div  style="display:none;">
-    <div id="div_preview">
-    </div>
-    <div id="div_download">
-        <div class="formcode">
-            <div>
-                <form method="get" action="">
-                    <span class="title_formcode">Nhập mã Download</span>
-                    <input type="text" class="input_formcode"/>
-                    <input type="submit" value="Nhập" class="submit_formcode"/>
-                </form>
-            </div>
-            <div>
-                <span class="thongbao">ĐỂ NHẬN MÃ DOWNLOAD, MỜI BẠN SOẠN TIN THEO CÚ PHÁP </span>
-                <span class="tukhoa">IPC IT </span>
-                <span class="thongbao">gửi</span> 
-                <span class="dauso">
-                    8517
-                    <span class="phitn">(5000 đ/1 tin nhắn)</span>
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
 </div>
 <div class="divfooter">
     <%-- Page footer --%>

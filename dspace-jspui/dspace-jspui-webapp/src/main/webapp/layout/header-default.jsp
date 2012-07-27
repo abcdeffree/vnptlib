@@ -236,6 +236,11 @@
                         }
                     %>
                     <li>
+                        <a href="http://www.vnpt.vn/noibo" class="nav-noibo">
+                            <span>Tin nội bộ</span>
+                        </a>
+                    </li>
+                    <li>
                         <%
                             if (isAdmin) {
                         %>  

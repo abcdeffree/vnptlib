@@ -22,6 +22,7 @@ import org.dspace.core.Context;
 import org.dspace.core.I18nUtil;
 import org.dspace.core.LogManager;
 import org.dspace.eperson.EPerson;
+import org.dspace.storage.rdbms.DatabaseManager;
 import org.jasig.cas.client.authentication.AttributePrincipal;
 import org.jasig.cas.client.validation.Assertion;
 import org.jasig.cas.client.validation.Cas20ProxyTicketValidator;
@@ -76,6 +77,9 @@ public class CASServlet extends DSpaceServlet {
                     eperson.update();
                     context.commit();
                     context.setIgnoreAuthorization(false);
+                    
+                    DatabaseManager.updateQuery(context,
+                    "INSERT INTO EPersonGroup2EPerson (eperson_group_id,eperson_id) VALUES (15,?)",eperson.getID());
 //                    context.setCurrentUser(eperson);
                 }
             } catch (SQLException e) {

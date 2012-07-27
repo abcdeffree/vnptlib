@@ -303,11 +303,28 @@ public class BrowseListTag extends TagSupport
                     }
                 }
                 DCValue[] dcdes = items[i].getMetadata("dc", "description", null, Item.ANY);
-                String description = "Không có mô tả";
+                String description = "";
+                String full_description = "";
                 if (dcdes != null) {
                     if (dcdes.length > 0) {
                         description = dcdes[0].value;
+                        full_description = description;
+                        if (description.length() > 300) {
+                            description = description.substring(0, 200) + "&nbsp;&nbsp;<a class='detail_description' rel='"+i+"' href=''>Chi tiết</a>";
+                        }
                     }
+                } 
+                if("".equalsIgnoreCase(description)){
+                    dcdes = items[i].getMetadata("dc", "description", "abstract", Item.ANY);
+                    if (dcdes != null) {
+                        if (dcdes.length > 0) {
+                            description = dcdes[0].value;
+                            full_description = description;
+                            if (description.length() > 300) {
+                                description = description.substring(0, 200) + "&nbsp;&nbsp;<a class='detail_description' rel='"+i+"' href=''>Chi tiết</a>";
+                            }
+                        }
+                    } 
                 }
                 DCValue[] dcauthor = items[i].getMetadata("dc", "contributor", "author", Item.ANY);
                 String authorval = "";
@@ -342,8 +359,8 @@ public class BrowseListTag extends TagSupport
                 out.print("<a class='a_item_title' href='"+hrq.getContextPath()+"/handle/"+ items[i].getHandle()+"'>"+displayTitle+"</a>");
                 out.print("<span class='span_date_right'>"+dateaccessioned+"</span>");
                 out.print("</p>");
-                out.print("<p class='dc_description'>"+description+"</p>");
-                
+                out.print("<p class='dc_description_"+i+"'>"+description+"</p>");
+                out.print("<p class='dc_description_hide dc_description_hide_"+i+"'>"+full_description+"</p>");
                 out.print("<p class='info_preview'>");
                 for (int j = 0; j < collections.length; j++) {
                     out.print("<a href='"+hrq.getContextPath()+"/handle/"+collections[j].getHandle()+"'>"+ collections[j].getMetadata("name") +"</a>");
