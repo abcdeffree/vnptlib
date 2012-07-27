@@ -59,19 +59,19 @@
         request.setAttribute("communities", communities);
         // list Recent item 
         RecentSubmissionsManager rsm = new RecentSubmissionsManager(context);
-        RecentSubmissions recent = rsm.getRecentSubmissions(null,null,"15",null);
+        RecentSubmissions recent = rsm.getRecentSubmissions(null,null,"5",null);
         request.setAttribute("recently.submitted", recent);
         // list recent subject
-        RecentSubmissions recenttitle = rsm.getRecentSubmissions(null, "title",null, null);
-        request.setAttribute("recently.submitted.title", recenttitle);
+//        RecentSubmissions recenttitle = rsm.getRecentSubmissions(null, "title",null, null);
+//        request.setAttribute("recently.submitted.title", recenttitle);
         // list recent author
-        String[][] recentauthor = rsm.getRecentAuthorSubmissions(null, "author", null, "dateaccessioned", SortOption.ASCENDING);
-        request.setAttribute("recently.submitted.author", recentauthor);
+//        String[][] recentauthor = rsm.getRecentAuthorSubmissions(null, "author", null, "dateaccessioned", SortOption.ASCENDING);
+//        request.setAttribute("recently.submitted.author", recentauthor);
         // list recent subject
-        String[][] recentsubject = rsm.getRecentAuthorSubmissions(null, "subject", null, "dateaccessioned", SortOption.ASCENDING);
-        request.setAttribute("recently.submitted.subject",recentsubject);
+//        String[][] recentsubject = rsm.getRecentAuthorSubmissions(null, "subject", null, "dateaccessioned", SortOption.ASCENDING);
+//        request.setAttribute("recently.submitted.subject",recentsubject);
         // list recent dateissued
-        RecentSubmissions recentdateissued = rsm.getRecentSubmissions(null, "dateissued",null, null);
+        RecentSubmissions recentdateissued = rsm.getRecentSubmissions(null, "dateissued","3", null);
         request.setAttribute("recently.submitted.dateissued", recentdateissued);
         // Show home page JSP
         JSPManager.showJSP(request, response, "/home.jsp");

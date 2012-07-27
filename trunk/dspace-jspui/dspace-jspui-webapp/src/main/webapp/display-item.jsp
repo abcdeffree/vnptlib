@@ -23,7 +23,7 @@
   -                  appear yet.  If this is omitted, the item display won't
   -                  display any collections.
   -    admin_button - Boolean, show admin 'edit' button
-  --%>
+--%>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 
@@ -43,14 +43,14 @@
     // Attributes
     Boolean displayAllBoolean = (Boolean) request.getAttribute("display.all");
     boolean displayAll = (displayAllBoolean != null && displayAllBoolean.booleanValue());
-    Boolean suggest = (Boolean)request.getAttribute("suggest.enable");
+    Boolean suggest = (Boolean) request.getAttribute("suggest.enable");
     boolean suggestLink = (suggest == null ? false : suggest.booleanValue());
     Item item = (Item) request.getAttribute("item");
     Collection[] collections = (Collection[]) request.getAttribute("collections");
     Comment[] comments = (Comment[]) request.getAttribute("comments");
-    Boolean admin_b = (Boolean)request.getAttribute("admin_button");
+    Boolean admin_b = (Boolean) request.getAttribute("admin_button");
     boolean admin_button = (admin_b == null ? false : admin_b.booleanValue());
-    String isAdmin = (admin_button? "admin" : "");
+    String isAdmin = (admin_button ? "admin" : "");
     // get the workspace id if one has been passed
     Integer workspace_id = (Integer) request.getAttribute("workspace_id");
 
@@ -63,237 +63,242 @@
 
     // Full title needs to be put into a string to use as tag argument
     String title = "";
-    if (handle == null)
- 	{
-		title = "Workspace Item";
-	}
-	else 
-	{
-		DCValue[] titleValue = item.getDC("title", null, Item.ANY);
-		if (titleValue.length != 0)
-		{
-			title = titleValue[0].value;
-		}
-		else
-		{
-			title = "Item " + handle;
-		}
-	}
+    if (handle == null) {
+        title = "Workspace Item";
+    } else {
+        DCValue[] titleValue = item.getDC("title", null, Item.ANY);
+        if (titleValue.length != 0) {
+            title = titleValue[0].value;
+        } else {
+            title = "Item " + handle;
+        }
+    }
     EPerson user = (EPerson) request.getAttribute("dspace.current.user");
 %>
 
 <%@page import="org.dspace.app.webui.servlet.MyDSpaceServlet"%>
-<dspace:layout title="<%= title %>">
+<dspace:layout title="<%= title%>">
 
-<%
-    if (handle != null)
-    {
-%>
-<div class="div_home_content">
-        <h3><img  class="nav_home_h3" src="<%= request.getContextPath()%>/image/community.png"/><code>Tài liệu :</code> <%= title %></h3>
-        <strong class="link_identifier_item">Đường dẫn tài liệu : <code><%= HandleManager.getCanonicalForm(handle) %></code></strong>
-        
-<%
-    String locationLink = request.getContextPath() + "/handle/" + handle;
+    <%
+        if (handle != null) {
+    %>
+    <div class="div_home_content">
+        <h3><img  class="nav_home_h3" src="<%= request.getContextPath()%>/image/community.png"/><code>Tài liệu :</code> <%= title%></h3>
+        <strong class="link_identifier_item">Đường dẫn tài liệu : <code><%= HandleManager.getCanonicalForm(handle)%></code></strong>
 
-    if (displayAll)
-    {
-%>
+        <%
+            String locationLink = request.getContextPath() + "/handle/" + handle;
 
-<div align="center" class="div_display">
-<%
-        if (workspace_id != null)
-        {
-%>
-    <form method="post" action="<%= request.getContextPath() %>/view-workspaceitem">
-        <input type="hidden" name="workspace_id" value="<%= workspace_id.intValue() %>" />
-        <input type="submit" name="submit_simple" value="<fmt:message key="jsp.display-item.text1"/>" />
-    </form>
-<%
-        }
-        else
-        {
-%>
-    <form method="get" action="<%=locationLink %>">
-        <input type="hidden" name="mode" value="simple"/>
-        <input type="submit" name="submit_simple" value="<fmt:message key="jsp.display-item.text1"/>" />
-    </form>
-<%
-        }
-%>
-    </div>
-<%
-    }
-    else
-    {
-%>
-    <div align="center">
-<%
-        if (workspace_id != null)
-        {
-%>
-    <form method="post" action="<%= request.getContextPath() %>/view-workspaceitem">
-        <input type="hidden" name="workspace_id" value="<%= workspace_id.intValue() %>" />
-        <input type="submit" name="submit_full" value="<fmt:message key="jsp.display-item.text2"/>" />
-    </form>
-<%
-        }
-        else
-        {
-%>
-    <form method="get" action="<%=locationLink %>">
-        <input type="hidden" name="mode" value="full"/>
-        <input type="submit" name="submit_simple" value="<fmt:message key="jsp.display-item.text2"/>" />
-    </form>
-<%
-        }
-        if (suggestLink)
-        {
-%>
-    <a href="<%= request.getContextPath() %>/suggest?handle=<%= handle %>" target="new_window">
-       <fmt:message key="jsp.display-item.suggest"/></a>
-<%
-        }
-%>
-    </div>
-<%
-    }
-%>
-        
-<%
-    }
-
-    String displayStyle = (displayAll ? "full" : "");
-%>
-    <dspace:item-preview item="<%= item %>" />
-    <dspace:item item="<%= item %>" collections="<%= collections %>" style="<%= displayStyle %>" isAdmin="<%=isAdmin%>"/>
-    <% if(user != null){%>
-    <div align="center" class="div_create_comment">
-        <p class="title_comment"><strong>Nhận xét về tài liệu:</strong></p>
-        <form method="post" action="<%= request.getContextPath() %>/comment/create" method="post">
-            <input type="hidden" name="item_id" value="<%= item.getID() %>"/>
-            <input type="hidden" name="handle" value="<%= handle %>"/>
-            <div class="comment_user_name">
-                <div class="comment_user_img">
-                    <img class="comment_img_top" src="<%= request.getContextPath()%>/image/person-icon.png" alt="">
-                    
-                    <a class="actorName" href="<%= request.getContextPath() %>/profile"><%=user.getFullName()%></a>
-                    
-                </div>
-                <div class="div_comment_input">
-                    <textarea name="content" class="comment_input"></textarea>   
-                </div>
-            </div>
-            <input type="submit" name="submit_comment" value="Nhận xét" class="share_button"/>
-        </form>
-    </div>
-                    <%}%>
-    <div style="clear: both"></div>
-    <div class="div_view_comment">
-        <% if(comments.length != 0){
-        for(int i=0;i<comments.length;i++){
-        Comment comment = comments[i];
+            if (displayAll) {
         %>
-        <div class="row_comment">
-            <a class="actorPic" href="#" >
-                <img class="comment_img" src="<%= request.getContextPath()%>/image/person-icon.png" alt="">
-            </a>
-            <div class="commentContent">
-                <span data-jsid="text" class="commentBody"><%= comment.getMetadata("content")%></span>
-                <div class="commentActions">
-                    <a class="actorName" href="#">
-                        <%= comment.getMemberName() %></a>
-                    <abbr class="timestampComment">
-                        <%= comment.getDate() %>
-                    </abbr>
-                </div>
-            </div>
+
+        <div align="center" class="div_display">
+            <%
+                if (workspace_id != null) {
+            %>
+            <form method="post" action="<%= request.getContextPath()%>/view-workspaceitem">
+                <input type="hidden" name="workspace_id" value="<%= workspace_id.intValue()%>" />
+                <input type="submit" name="submit_simple" value="<fmt:message key="jsp.display-item.text1"/>" />
+            </form>
+            <%
+            } else {
+            %>
+            <form method="get" action="<%=locationLink%>">
+                <input type="hidden" name="mode" value="simple"/>
+                <input type="submit" name="submit_simple" value="<fmt:message key="jsp.display-item.text1"/>" />
+            </form>
+            <%
+                }
+            %>
         </div>
         <%
-        }
+        } else {
+        %>
+        <div align="center">
+            <%
+                if (workspace_id != null) {
+            %>
+            <form method="post" action="<%= request.getContextPath()%>/view-workspaceitem">
+                <input type="hidden" name="workspace_id" value="<%= workspace_id.intValue()%>" />
+                <input type="submit" name="submit_full" value="<fmt:message key="jsp.display-item.text2"/>" />
+            </form>
+            <%
+            } else {
+            %>
+            <form method="get" action="<%=locationLink%>">
+                <input type="hidden" name="mode" value="full"/>
+                <input type="submit" name="submit_simple" value="<fmt:message key="jsp.display-item.text2"/>" />
+            </form>
+            <%
+                }
+                if (suggestLink) {
+            %>
+            <a href="<%= request.getContextPath()%>/suggest?handle=<%= handle%>" target="new_window">
+                <fmt:message key="jsp.display-item.suggest"/></a>
+                <%
+                    }
+                %>
+        </div>
+        <%
+            }
         %>
 
-        <% }%>
+        <%
+            }
+
+            String displayStyle = (displayAll ? "full" : "");
+        %>
+        <dspace:item-preview item="<%= item%>" />
+        <dspace:item item="<%= item%>" collections="<%= collections%>" style="<%= displayStyle%>" isAdmin="<%=isAdmin%>"/>
+        <% if (user != null) {%>
+        <div align="center" class="div_create_comment">
+            <p class="title_comment"><strong>Nhận xét về tài liệu:</strong></p>
+            <form method="post" action="<%= request.getContextPath()%>/comment/create" method="post">
+                <input type="hidden" name="item_id" value="<%= item.getID()%>"/>
+                <input type="hidden" name="handle" value="<%= handle%>"/>
+                <div class="comment_user_name">
+                    <div class="comment_user_img">
+                        <img class="comment_img_top" src="<%= request.getContextPath()%>/image/person-icon.png" alt="">
+
+                        <a class="actorName" href="<%= request.getContextPath()%>/profile"><%=user.getFullName()%></a>
+
+                    </div>
+                    <div class="div_comment_input">
+                        <textarea name="content" class="comment_input"></textarea>   
+                    </div>
+                </div>
+                <input type="submit" name="submit_comment" value="Nhận xét" class="share_button"/>
+            </form>
+        </div>
+        <%}%>
+        <div style="clear: both"></div>
+        <div class="div_view_comment">
+            <% if (comments.length != 0) {
+                    for (int i = 0; i < comments.length; i++) {
+                        Comment comment = comments[i];
+            %>
+            <div class="row_comment">
+                <a class="actorPic" href="#" >
+                    <img class="comment_img" src="<%= request.getContextPath()%>/image/person-icon.png" alt="">
+                </a>
+                <div class="commentContent">
+                    <span data-jsid="text" class="commentBody"><%= comment.getMetadata("content")%></span>
+                    <div class="commentActions">
+                        <a class="actorName" href="#">
+                            <%= comment.getMemberName()%></a>
+                        <abbr class="timestampComment">
+                            <%= comment.getDate()%>
+                        </abbr>
+                    </div>
+                </div>
+            </div>
+            <%
+                }
+            %>
+
+            <% }%>
+        </div>
     </div>
-</div>
 
     <dspace:sidebar>
-<%
-        if (admin_button)  // admin edit button
-        { %>
+        <%
+    if (admin_button) // admin edit button
+    {%>
         <table align="center" class="miscTable">
-        <tr>
-            <td class="evenRowEvenCol" align="center">
-                <form method="post" action="<%= request.getContextPath() %>/mydspace">
-                    <input type="hidden" name="item_id" value="<%= item.getID() %>" />
-                    <input type="hidden" name="step" value="<%= MyDSpaceServlet.REQUEST_EXPORT_ARCHIVE %>" />
-                    <input type="submit" name="submit" value="<fmt:message key="jsp.mydspace.request.export.item"/>" />
-                </form>
-                <form method="post" action="<%= request.getContextPath() %>/mydspace">
-                    <input type="hidden" name="item_id" value="<%= item.getID() %>" />
-                    <input type="hidden" name="step" value="<%= MyDSpaceServlet.REQUEST_MIGRATE_ARCHIVE %>" />
-                    <input type="submit" name="submit" value="<fmt:message key="jsp.mydspace.request.export.migrateitem"/>" />
-                </form>
-                <form method="post" action="<%= request.getContextPath() %>/dspace-admin/metadataexport">
-                    <input type="hidden" name="handle" value="<%= item.getHandle() %>" />
-                    <input type="submit" name="submit" value="<fmt:message key="jsp.general.metadataexport.button"/>" />
-                </form>
+            <tr>
+                <td class="evenRowEvenCol" align="center">
+                    <form method="post" action="<%= request.getContextPath()%>/mydspace">
+                        <input type="hidden" name="item_id" value="<%= item.getID()%>" />
+                        <input type="hidden" name="step" value="<%= MyDSpaceServlet.REQUEST_EXPORT_ARCHIVE%>" />
+                        <input type="submit" name="submit" value="<fmt:message key="jsp.mydspace.request.export.item"/>" />
+                    </form>
+                    <form method="post" action="<%= request.getContextPath()%>/mydspace">
+                        <input type="hidden" name="item_id" value="<%= item.getID()%>" />
+                        <input type="hidden" name="step" value="<%= MyDSpaceServlet.REQUEST_MIGRATE_ARCHIVE%>" />
+                        <input type="submit" name="submit" value="<fmt:message key="jsp.mydspace.request.export.migrateitem"/>" />
+                    </form>
+                    <form method="post" action="<%= request.getContextPath()%>/dspace-admin/metadataexport">
+                        <input type="hidden" name="handle" value="<%= item.getHandle()%>" />
+                        <input type="submit" name="submit" value="<fmt:message key="jsp.general.metadataexport.button"/>" />
+                    </form>
 
-            </td>
-            <td class="evenRowEvenCol" align="center">
-                <form method="get" action="<%= request.getContextPath() %>/tools/edit-item">
-                    <input type="hidden" name="item_id" value="<%= item.getID() %>" />
-                    <%--<input type="submit" name="submit" value="Edit...">--%>
-                    <input type="submit" name="submit" value="<fmt:message key="jsp.general.edit.button"/>" />
-                </form>
-            </td>
+                </td>
+                <td class="evenRowEvenCol" align="center">
+                    <form method="get" action="<%= request.getContextPath()%>/tools/edit-item">
+                        <input type="hidden" name="item_id" value="<%= item.getID()%>" />
+                        <%--<input type="submit" name="submit" value="Edit...">--%>
+                        <input type="submit" name="submit" value="<fmt:message key="jsp.general.edit.button"/>" />
+                    </form>
+                </td>
             </tr>
-    </table>
-<%      } %>
-        
+        </table>
+        <%      }%>
 
 
-<%
-    if (workspace_id != null)
-    {
-%>
-<div align="center">
-   <form method="post" action="<%= request.getContextPath() %>/workspace">
-        <input type="hidden" name="workspace_id" value="<%= workspace_id.intValue() %>"/>
-        <input type="submit" name="submit_open" value="<fmt:message key="jsp.display-item.back_to_workspace"/>"/>
-    </form>
-</div>
-<%
-    }
-%>
-    <%-- SFX Link --%>
-<%
-    if (ConfigurationManager.getProperty("sfx.server.url") != null)
-    {
-%>
-    <p align="center">
-        <a href="<dspace:sfxlink item="<%= item %>"/>" /><img src="<%= request.getContextPath() %>/image/sfx-link.gif" border="0" alt="SFX Query" /></a>
+
+        <%
+            if (workspace_id != null) {
+        %>
+        <div align="center">
+            <form method="post" action="<%= request.getContextPath()%>/workspace">
+                <input type="hidden" name="workspace_id" value="<%= workspace_id.intValue()%>"/>
+                <input type="submit" name="submit_open" value="<fmt:message key="jsp.display-item.back_to_workspace"/>"/>
+            </form>
+        </div>
+        <%
+            }
+        %>
+        <%-- SFX Link --%>
+        <%
+            if (ConfigurationManager.getProperty("sfx.server.url") != null) {
+        %>
+        <p align="center">
+            <a href="<dspace:sfxlink item="<%= item%>"/>" /><img src="<%= request.getContextPath()%>/image/sfx-link.gif" border="0" alt="SFX Query" /></a>
     </p>
-<%
-    }
-%>
+    <%
+        }
+    %>
     <%-- Create Commons Link --%>
-<%
-    if (cc_url != null)
-    {
-%>
-    <p class="submitFormHelp"><fmt:message key="jsp.display-item.text3"/> <a href="<%= cc_url %>"><fmt:message key="jsp.display-item.license"/></a><br/>
-    <a href="<%= cc_url %>"><img src="<%= request.getContextPath() %>/image/cc-somerights.gif" border="0" alt="Creative Commons" /></a>
+    <%
+        if (cc_url != null) {
+    %>
+    <p class="submitFormHelp"><fmt:message key="jsp.display-item.text3"/> <a href="<%= cc_url%>"><fmt:message key="jsp.display-item.license"/></a><br/>
+        <a href="<%= cc_url%>"><img src="<%= request.getContextPath()%>/image/cc-somerights.gif" border="0" alt="Creative Commons" /></a>
     </p>
     <!--
-    <%= cc_rdf %>
+    <%= cc_rdf%>
     -->
-<%
-    }
-%>
+    <%
+        }
+    %>
 </dspace:sidebar>
-    <div align="center">
-        <a class="statisticsLink" href="<%= request.getContextPath() %>/handle/<%= handle %>/statistics"><fmt:message key="jsp.display-item.display-statistics"/></a>
-        <p class="submitFormHelp"><fmt:message key="jsp.display-item.copyright"/></p>
+<!--div align="center">
+    <a class="statisticsLink" href="<%//= request.getContextPath()%>/handle/<%//= handle%>/statistics"><fmt:message key="jsp.display-item.display-statistics"/></a>
+    <p class="submitFormHelp"><fmt:message key="jsp.display-item.copyright"/></p>
+</div-->
+<div style="clear: both"></div>
+<div  style="display:none;">
+    <div id="div_preview">
     </div>
+    <div id="div_download">
+        <div class="formcode">
+            <div>
+                <span class="title_formcode">Nhập mã Download</span>
+                <input type="text" class="input_formcode"/>
+                <input type="hidden" id="otp_url" value="<%= request.getContextPath()%>/otp?item_id=<%= item.getID()%>" />
+                <input type="submit" value="Nhập" class="submit_formcode"/>
+                <p class="result"></p>
+            </div>
+            <div>
+                <span class="thongbao">ĐỂ NHẬN MÃ DOWNLOAD, MỜI BẠN SOẠN TIN THEO CÚ PHÁP </span>
+                <span class="tukhoa">TVS </span>
+                <span class="thongbao">gửi</span> 
+                <span class="dauso">
+                    8581
+                    <span class="phitn">(5000 đ/1 tin nhắn)</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
 </dspace:layout>

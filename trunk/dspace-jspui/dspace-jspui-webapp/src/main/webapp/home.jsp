@@ -70,8 +70,7 @@
                         if (ConfigurationManager.getBooleanProperty("webui.strengths.show")) {
                     %>
                     <!--<span class="count">[<%//= ic.getCount(communities[i])%>]</span> -->
-                    <%
-                        }
+                    <%                        }
 
                     %>
                 <li>
@@ -91,8 +90,7 @@
                         if (ConfigurationManager.getBooleanProperty("webui.strengths.show")) {
                     %>
                     <!--span class="count">[<%//= ic.getCount(communities[i])%>]</span-->
-                    <%
-                        }
+                    <%                        }
 
                     %>
                 <li>
@@ -130,22 +128,36 @@
                             }
                             DCValue[] dcdes = items[i].getMetadata("dc", "description", null, Item.ANY);
                             String description = "";
+                            String full_description = "";
                             if (dcdes != null) {
                                 if (dcdes.length > 0) {
                                     description = dcdes[0].value;
-                                    if(description.length() > 200){
-                                        description = description.substring(0, 200)+"...";
+                                    full_description = description;
+                                    if (description.length() > 200) {
+                                        description = description.substring(0, 200) + "&nbsp;&nbsp;<a class='detail_description' rel='"+i+"' href=''>Chi tiết</a>";
                                     }
                                 }
+                            } 
+                            if("".equalsIgnoreCase(description)){
+                                dcdes = items[i].getMetadata("dc", "description", "abstract", Item.ANY);
+                                if (dcdes != null) {
+                                    if (dcdes.length > 0) {
+                                        description = dcdes[0].value;
+                                        full_description = description;
+                                        if (description.length() > 200) {
+                                            description = description.substring(0, 200) + "&nbsp;&nbsp;<a class='detail_description' rel='"+i+"' href=''>Chi tiết</a>";
+                                        }
+                                    }
+                                } 
                             }
-                            
+
                             DCValue[] dateissued = items[i].getMetadata("dc", "date", "issued", Item.ANY);
                             String dateissuedval = "";
                             if (dateissued != null) {
                                 if (dateissued.length > 0) {
                                     dateissuedval = dateissued[0].value;
-            //                        DCDate dateissuedvaldate = new DCDate(dateissuedval);
-            //                        dateissuedval = UIUtil.displayDate(dateissuedvaldate, true, true, (HttpServletRequest)pageContext.getRequest());
+                                    //                        DCDate dateissuedvaldate = new DCDate(dateissuedval);
+                                    //                        dateissuedval = UIUtil.displayDate(dateissuedvaldate, true, true, (HttpServletRequest)pageContext.getRequest());
                                 }
                             }
                             DCValue[] dcauthor = items[i].getMetadata("dc", "contributor", "author", Item.ANY);
@@ -158,60 +170,56 @@
                             DCDate dateaccesionval = new DCDate(items[i].getLastModified());
                             Collection[] collections = items[i].getCollections();
                 %>
-                    <div class="div_recent_item">
-                        <p class="recentItem">
-                        <img  class="a_recentitem" src="<%= request.getContextPath()%>/image/transparent.gif"/>
-                        <a class="a_item_title" href="<%= request.getContextPath()%>/handle/<%= items[i].getHandle()%>"><%= displayTitle%></a>
-                        <span class="span_date_right"><dspace:date date="<%= dateaccesionval %>" /></span>
-                        </p>
-                        <p class="dc_description">
-                            <%=description%>
-                        </p>
-                        <p class='info_preview'>
-                        <%  for (int j = 0; j < collections.length; j++) { %>
-                                                        <a href="<%= request.getContextPath() %>/handle/<%= collections[j].getHandle() %>"><%= collections[j].getMetadata("name") %></a>
-                                    <%  } %>
-                        <% if(!"".equals(authorval)){ %>
-                            &nbsp;-&nbsp;Tác giả: <span><%=authorval%></span>
-                        <%}%>
-                        <% if(!"".equals(dateissuedval)){ %>
-                            &nbsp;-&nbsp;Xuất bản: <span><%=dateissuedval%></span>
-                        <%}%>
-                        </p>
-                    </div>
-                    <%
-                            }
-                        }
-                    %>
+        <div class="div_recent_item">
+            <p class="recentItem">
+                <img  class="a_recentitem" src="<%= request.getContextPath()%>/image/transparent.gif"/>
+                <a class="a_item_title" href="<%= request.getContextPath()%>/handle/<%= items[i].getHandle()%>"><%= displayTitle%></a>
+                <span class="span_date_right"><dspace:date date="<%= dateaccesionval%>" /></span>
+            </p>
+            <p class="dc_description_<%=i%>">
+                <%=description%>
+            </p>
+            <p class="dc_description_hide dc_description_hide_<%=i%>">
+                <%=full_description%>
+            </p>
+            <p class='info_preview'>
+                <%  for (int j = 0; j < collections.length; j++) {%>
+                <a href="<%= request.getContextPath()%>/handle/<%= collections[j].getHandle()%>"><%= collections[j].getMetadata("name")%></a>
+                <%  }%>
+                <% if (!"".equals(authorval)) {%>
+                &nbsp;-&nbsp;Tác giả: <span><%=authorval%></span>
+                <%}%>
+                <% if (!"".equals(dateissuedval)) {%>
+                &nbsp;-&nbsp;Xuất bản: <span><%=dateissuedval%></span>
+                <%}%>
+            </p>
+        </div>
+        <%
+                }
+            }
+        %>
         <div class="div_box_subbar_content_footer"></div>
     </div>
-    <dspace:sidebar>
-        <embed height="349" width="240" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" 
-               src="/dspace/image/vnptipc.swf" play="true" loop="true" menu="true">
-        <div class="div_box_rightbar">
-            <h3><img  class="nav_home_h3" src="<%= request.getContextPath()%>/image/document_good.png"/>Tài liệu nhiều người dùng </h3>
-                <%
-                    RecentSubmissions rsdateissued = (RecentSubmissions) request.getAttribute("recently.submitted.dateissued");
-                    if (rsdateissued != null) {
-                        Item[] items = rsdateissued.getRecentSubmissions();
-                        for (int i = 0; i < items.length; i++) {
-                            DCValue[] dcv = items[i].getMetadata("dc", "title", null, Item.ANY);
-                            String displayTitle = "Untitled";
-                            if (dcv != null) {
-                                if (dcv.length > 0) {
-                                    displayTitle = dcv[0].value;
-                                }
+    <div class="div_box_rightbar">
+        <h3><img  class="nav_home_h3" src="<%= request.getContextPath()%>/image/document_good.png"/>Tài liệu nhiều người dùng </h3>
+            <%
+                RecentSubmissions rsdateissued = (RecentSubmissions) request.getAttribute("recently.submitted.dateissued");
+                if (rsdateissued != null) {
+                    Item[] items = rsdateissued.getRecentSubmissions();
+                    for (int i = 0; i < items.length; i++) {
+                        DCValue[] dcv = items[i].getMetadata("dc", "title", null, Item.ANY);
+                        String displayTitle = "Untitled";
+                        if (dcv != null) {
+                            if (dcv.length > 0) {
+                                displayTitle = dcv[0].value;
                             }
-                %><p class="recentItem">
-                <img  class="a_recentitem_toppage" src="<%= request.getContextPath()%>/image/transparent.gif"/>
-                <a href="<%= request.getContextPath()%>/handle/<%= items[i].getHandle()%>"><%= displayTitle%></a></p><%
                         }
+            %>
+            <p class="recentItem">
+            <img  class="a_recentitem_toppage" src="<%= request.getContextPath()%>/image/transparent.gif"/>
+            <a href="<%= request.getContextPath()%>/handle/<%= items[i].getHandle()%>"><%= displayTitle%></a></p><%
                     }
-                %>
-        </div>
-        <div class="div_box_rightbar">
-            <h3><img  class="nav_home_h3" src="<%= request.getContextPath()%>/image/document_good.png"/>Quảng cáo</h3>
-            <%= adventiseNews%>
-        </div>
-    </dspace:sidebar>
+                }
+            %>
+    </div>
 </dspace:layout>

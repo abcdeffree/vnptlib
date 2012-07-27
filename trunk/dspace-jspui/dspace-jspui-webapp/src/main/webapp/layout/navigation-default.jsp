@@ -33,7 +33,7 @@
             persist: "cookie",
             cookieId: "treeview-black",
             speed: "fast",
-            collapsed: false
+            collapsed: true
             });
     });
 </script>

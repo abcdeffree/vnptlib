@@ -26,6 +26,7 @@ import org.dspace.app.webui.util.UIUtil;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.authorize.AuthorizeManager;
 import org.dspace.content.*;
+import org.dspace.core.ConfigurationManager;
 import org.dspace.harvest.HarvestedCollection;
 import org.dspace.core.Constants;
 import org.dspace.core.Context;
@@ -53,28 +54,41 @@ public class OtpServlet extends DSpaceServlet {
             SQLException, AuthorizeException {
         int item_id = UIUtil.getIntParameter(request, "item_id");
         String otp_content = request.getParameter("otp");
-        if (item_id == -1) {
-            response.setContentType("application/json");
+        Item item = Item.find(context, item_id);
+        if (item_id == -1 || item == null) {
+            response.setContentType("text/html");
             // Get the printwriter object from response to write the required json object to the output stream      
             PrintWriter out = response.getWriter();
             // Assuming your json object is **jsonObject**, perform the following, it will return your json object  
-            out.print("{status: true, url: 'url'}");
+            out.print("Không tồn tại tài liệu!");
             out.flush();
 //            response.sendRedirect(request.getContextPath());
         } else {
-//        EPerson currentUser = context.getCurrentUser();
-
-            Otp otp = Otp.findByOtp(context, otp_content);
-            otp.setInteger("is_active", 0);
-            otp.update();
-            context.complete();
-
-            response.setContentType("application/json");
-            // Get the printwriter object from response to write the required json object to the output stream      
-            PrintWriter out = response.getWriter();
-            // Assuming your json object is **jsonObject**, perform the following, it will return your json object  
-            out.print("{status: true, url: 'url'}");
-            out.flush();
+            Otp otp_obj = Otp.findByOtp(context, otp_content);
+            if (otp_obj == null) {
+                response.setContentType("text/html;charset=UTF-8");
+                // Get the printwriter object from response to write the required json object to the output stream      
+                PrintWriter out = response.getWriter();
+                // Assuming your json object is **jsonObject**, perform the following, it will return your json object  
+                out.print("Mã download không đúng!");
+                out.flush();
+            } else {
+                otp_obj.setInteger("is_active", 0);
+                otp_obj.update();
+                response.setContentType("text/html;charset=UTF-8");
+                // Get the printwriter object from response to write the required json object to the output stream      
+                PrintWriter out = response.getWriter();
+                // Assuming your json object is **jsonObject**, perform the following, it will return your json object  
+                Bundle[] bundles = item.getBundles("ORIGINAL");
+                Bitstream[] bitstreams = bundles[0].getBitstreams();
+                String url =ConfigurationManager.getProperty("dspace.baseUrl") + request.getContextPath()+ "/bitstream/"
+                                                            + item.getHandle()
+                                                            + "/" + bitstreams[0].getSequenceID()
+                                                            + "/" + UIUtil.encodeBitstreamName(bitstreams[0].getName(), Constants.DEFAULT_ENCODING);
+                out.print("Đường dẫn download tài liệu:<a href='"+url+"'>"+url+"</a>");
+                out.flush();
+                context.complete();
+            }
         }
     }
 

@@ -46,7 +46,7 @@ function addGroup(id, name)
 {
     var newplace = window.document.epersongroup.group_ids.options.length;
 
-	if (newplace > 0 && window.document.epersongroup.group_ids.options[0].value == "")
+    if (newplace > 0 && window.document.epersongroup.group_ids.options[0].value == "")
     {
         newplace = 0;
     }
@@ -82,10 +82,10 @@ function finishEPerson()
 {
     selectAll(window.document.epersongroup.eperson_id);
 
-	if (popupWindow != null)
-	{
-		popupWindow.close();
-	}
+    if (popupWindow != null)
+    {
+        popupWindow.close();
+    }
 }
 
 // This needs to be invoked in the 'onClick' javascript event for buttons
@@ -96,7 +96,7 @@ function finishGroups()
 
     if (popupWindow != null)
     {
-		popupWindow.close();
+        popupWindow.close();
     }
 }
 
@@ -142,17 +142,17 @@ function removeSelected(sourceList)
 // Just add "onkeydown='return disableEnterKey(event);'" to form.
 function disableEnterKey(e)
 {
-     var key;
+    var key;
 
-     if(window.event)
-          key = window.event.keyCode;     //Internet Explorer
-     else
-          key = e.which;     //Firefox & Netscape
+    if(window.event)
+        key = window.event.keyCode;     //Internet Explorer
+    else
+        key = e.which;     //Firefox & Netscape
 
-     if(key == 13)  //if "Enter" pressed, then disable!
-          return false;
-     else
-          return true;
+    if(key == 13)  //if "Enter" pressed, then disable!
+        return false;
+    else
+        return true;
 }
 
 
@@ -162,118 +162,122 @@ function disableEnterKey(e)
 //******************************************************
 
 function expandCollapse(node, contextPath) {
-	node = node.parentNode;
-	var childNode  = (node.getElementsByTagName("ul"))[0];
+    node = node.parentNode;
+    var childNode  = (node.getElementsByTagName("ul"))[0];
 
-	if(!childNode) return false;
+    if(!childNode) return false;
 
-	var image = node.getElementsByTagName("img")[0];
+    var image = node.getElementsByTagName("img")[0];
 	
-	if(childNode.style.display != "block") {
-		childNode.style.display  = "block";
-		image.src = contextPath + "/image/controlledvocabulary/m.gif";
-		image.alt = "Collapse search term category";
-	} else {
-		childNode.style.display  = "none";
-		image.src = contextPath + "/image/controlledvocabulary/p.gif";
-		image.alt = "Expand search term category";
-	}
+    if(childNode.style.display != "block") {
+        childNode.style.display  = "block";
+        image.src = contextPath + "/image/controlledvocabulary/m.gif";
+        image.alt = "Collapse search term category";
+    } else {
+        childNode.style.display  = "none";
+        image.src = contextPath + "/image/controlledvocabulary/p.gif";
+        image.alt = "Expand search term category";
+    }
 	
-	return false;
+    return false;
 }
 
 
 function getAnchorText(ahref) {
- 	if(isMicrosoft()) return ahref.childNodes.item(0).nodeValue;
-	else return ahref.text;
+    if(isMicrosoft()) return ahref.childNodes.item(0).nodeValue;
+    else return ahref.text;
 }
 
 function getTextValue(node) {
- 	if(node.nodeName == "A") {
- 		return getAnchorText(node);
- 	} else {
- 		return "";
- 	}
+    if(node.nodeName == "A") {
+        return getAnchorText(node);
+    } else {
+        return "";
+    }
  	
 }
 
 
 function getParentTextNode(node) {
-	var parentNode = node.parentNode.parentNode.parentNode;
-	var children = parentNode.childNodes;
-	var textNode;
-	for(var i=0; i< children.length; i++) {
-		var child = children.item(i);
-		if(child.className == "value") {
-			return child;
-		}
-	}
-	return null;
+    var parentNode = node.parentNode.parentNode.parentNode;
+    var children = parentNode.childNodes;
+    var textNode;
+    for(var i=0; i< children.length; i++) {
+        var child = children.item(i);
+        if(child.className == "value") {
+            return child;
+        }
+    }
+    return null;
 }
 
 function ec(node, contextPath) {
-	expandCollapse(node, contextPath);
-	return false;
+    expandCollapse(node, contextPath);
+    return false;
 }
 
 
 function i(node) {
-	return sendBackToParentWindow(node);
+    return sendBackToParentWindow(node);
 }
 
 
 function getChildrenByTagName(rootNode, tagName) {
-	var children = rootNode.childNodes;
-	var result = new Array(0);
-	if(children == null) return result;
-	for(var i=0; i<children.length; i++) {
-		if(children[i].tagName == tagName) {
-			var elementArray = new Array(1);
-			elementArray[0] = children[i];
-			result = result.concat(elementArray);
-		}
-	}
-	return result;
+    var children = rootNode.childNodes;
+    var result = new Array(0);
+    if(children == null) return result;
+    for(var i=0; i<children.length; i++) {
+        if(children[i].tagName == tagName) {
+            var elementArray = new Array(1);
+            elementArray[0] = children[i];
+            result = result.concat(elementArray);
+        }
+    }
+    return result;
 }
 
 function popUp(URL) {
-	var page;
-	page = window.open(URL, 'controlledvocabulary', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=650,height=450');
+    var page;
+    page = window.open(URL, 'controlledvocabulary', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=650,height=450');
 }
 
 
 function isNetscape(v) {
-		  return isBrowser("Netscape", v);
+    return isBrowser("Netscape", v);
 }
 	
 function isMicrosoft(v) {
-		  return isBrowser("Microsoft", v);
+    return isBrowser("Microsoft", v);
 }
 
 function isMicrosoft() {
-		  return isBrowser("Microsoft", 0);
+    return isBrowser("Microsoft", 0);
 }
 
 
 function isBrowser(b,v) {
-		  browserOk = false;
-		  versionOk = false;
+    browserOk = false;
+    versionOk = false;
 
-		  browserOk = (navigator.appName.indexOf(b) != -1);
-		  if (v == 0) versionOk = true;
-		  else  versionOk = (v <= parseInt(navigator.appVersion));
-		  return browserOk && versionOk;
+    browserOk = (navigator.appName.indexOf(b) != -1);
+    if (v == 0) versionOk = true;
+    else  versionOk = (v <= parseInt(navigator.appVersion));
+    return browserOk && versionOk;
 }
 
 
 
 function showHideToggle(divID) {
-   if (document.getElementById && !document.all) {
-       previewBox = document.getElementById(divID);
-       var state = previewBox.style.display;
-       if (state == 'block') {state = 'none';} else {state = 'block';}
-       previewBox.style.display = state;
-   }
+    if (document.getElementById && !document.all) {
+        previewBox = document.getElementById(divID);
+        var state = previewBox.style.display;
+        if (state == 'block') {
+            state = 'none';
+        } else {
+            state = 'block';
+        }
+        previewBox.style.display = state;
+    }
 }
 
 function urlencode(str) {
@@ -288,32 +292,82 @@ jQuery(document).ready(function(){
     jQuery(".preview").click(function(event){
         var source = jQuery(this).attr("rel");
         if(source != undefined){
-            if(
-                source.endsWith(".pdf")
-                || 
-                source.endsWith(".doc")
-                || 
-                source.endsWith(".ppt")
-                || 
-                source.endsWith(".docx")
-                || 
-                source.endsWith(".html")
-                ) {
-                source = urlencode(source);
-                source = "http://docs.google.com/viewer?url="+source+"&embedded=true";
-                var height = jQuery(window).height()-70+"px"; 
-//                jQuery("#embed").height(jQuery(window).height()-70+"px");
-//                jQuery("#embed").attr("src", source); //requires jQuery
-                jQuery("#div_preview").html("<div class='hide_download'></div><iframe id='embed' src='"+source+"' width='100%' height='"+height+"' style='border: none;'></iframe>");
-                jQuery(".preview").colorbox({inline:true, width:"80%"});
-            }else if(source.endsWith(".mp4")){
-                jQuery("#div_preview").html('<video width="640" height="480" controls="controls" autoplay="autoplay">  <source src="'+source+'" type="video/mp4" />Your browser does not support the video tag.</video>');
-                jQuery(".preview").colorbox({inline:true, width:"700px"});
-            }else{
-                event.preventDefault();
-                window.open(source,"View File");
-            }
+            source = urlencode(source);
+            source = "http://docs.google.com/viewer?url="+source+"&embedded=true&hl=vi";
+            var height = jQuery(window).height()-70+"px"; 
+            //                jQuery("#embed").height(jQuery(window).height()-70+"px");
+            //                jQuery("#embed").attr("src", source); //requires jQuery
+            jQuery("#div_preview").html("<div class='hide_download'></div><iframe id='embed' src='"+source+"' width='100%' height='"+height+"' style='border: none;'></iframe>");
+            jQuery(".preview").colorbox({
+                inline:true, 
+                width:"80%"
+            });
         }
     });
-    jQuery(".download").colorbox({inline:true, width:"400px",height:"250px"});
+    jQuery(".image_preview").click(function(event){
+        var source = jQuery(this).attr("rel");
+            if(source != undefined){
+            jQuery("#div_preview").html('<img src="'+source+'" alt=""/>');
+            jQuery(".image_preview").colorbox({
+                inline:true, 
+                width:"700px"
+            });
+        }
+    });
+    jQuery(".mp4_preview").click(function(event){
+        var source = jQuery(this).attr("rel");
+            if(source != undefined){
+            jQuery("#div_preview").html('<video width="640" height="480" controls="controls" autoplay="autoplay">  <source src="'+source+'" type="video/mp4" />Your browser does not support the video tag.</video>');
+            jQuery(".mp4_preview").colorbox({
+                inline:true, 
+                width:"700px"
+            });
+        }
+    });
+    jQuery(".mpg_preview").click(function(event){
+        var source = jQuery(this).attr("rel");
+            if(source != undefined){
+            jQuery("#div_preview").html('<object id="MediaPlayer1" CLASSID="CLSID:22d6f312-b0f6-11d0-94ab-0080c74c7e95" codebase="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=5,1,52,701"'+
+            'standby="Loading Microsoft Windows® Media Player components..." type="application/x-oleobject" width="640" height="480">'+
+            '<param name="fileName" value="'+source+'">'+
+            '<param name="animationatStart" value="true">'+
+            '<param name="transparentatStart" value="true">'+
+            '<param name="autoStart" value="true">'+
+            '<param name="showControls" value="true">'+
+            '<param name="Volume" value="-450">'+
+            '<embed type="application/x-mplayer2" pluginspage="http://www.microsoft.com/Windows/MediaPlayer/" src="'+source+'" name="MediaPlayer1" width=640 height=480 autostart=1 showcontrols=1 volume=-450>'+
+            '</object>');
+            jQuery(".mpg_preview").colorbox({
+                inline:true, 
+                width:"700px"
+            });
+        }
+    });
+    jQuery(".viewdown").click(function(event){
+        var source = jQuery(this).attr("rel");
+        if(source != undefined){
+            event.preventDefault();
+            window.open(source,"View File");
+        }
+    });
+    jQuery(".download").colorbox({
+        inline:true, 
+        width:"600px",
+        height:"400px"
+    });
+    jQuery(".submit_formcode").click(function(event){
+        event.preventDefault();
+        jQuery(".result").html("");
+        jQuery.get(jQuery("#otp_url").val(), 
+        {otp:jQuery(".input_formcode").val()},
+        function(data) {
+                //redirect to url
+            jQuery(".result").html(data);
+        });
+    });
+    jQuery(".detail_description").click(function(event){
+        event.preventDefault();
+        var rel = jQuery(this).attr("rel");
+        jQuery(".dc_description_"+rel).html(jQuery(".dc_description_hide_"+rel).html());
+    });
 })

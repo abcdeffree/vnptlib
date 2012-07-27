@@ -18,16 +18,24 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <%@ taglib uri="/WEB-INF/dspace-tags.tld" prefix="dspace" %>
+<%
+String adventiseNews = ConfigurationManager.readNewsFile(LocaleSupport.getLocalizedMessage(pageContext, "news-adventise.html"));
+%>
+<embed height="349" width="240" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" 
+               src="/dspace/image/vnptipcv2.swf" play="true" loop="true" menu="true">
+<div class="div_box_rightbar">
+        <%= adventiseNews%>
+</div>
 <div class="div_box_rightbar">
     <h3><img  class="nav_home_h3" src="<%= request.getContextPath()%>/image/help.png"/>Hỗ trợ từ quản trị</h3>
     <ul>
         <li>
             <p style="width: 268px;height: 100px">
-            <a href="ymsgr:SendIM?le_huy_thuc">
-                <img alt="'Yahoo!" border="0" src="http://opi.yahoo.com/online?u=le_huy_thuc&amp;m=g&amp;t=14&amp;l=us&amp;opi.jpg" style="width: 112px; height: 89px;">
+            <a href="ymsgr:SendIM?manh0702">
+                <img alt="'Yahoo!" border="0" src="http://opi.yahoo.com/online?u=manh0702&amp;m=g&amp;t=14&amp;l=us&amp;opi.jpg" style="width: 112px; height: 89px;">
             </a>
-            <a href="ymsgr:SendIM?le_huy_thuc">
-                <img alt="'Yahoo!" border="0" src="http://opi.yahoo.com/online?u=le_huy_thuc&amp;m=g&amp;t=14&amp;l=us&amp;opi.jpg" style="width: 112px; height: 89px;">
+            <a href="ymsgr:SendIM?manh0702">
+                <img alt="'Yahoo!" border="0" src="http://opi.yahoo.com/online?u=manh0702&amp;m=g&amp;t=14&amp;l=us&amp;opi.jpg" style="width: 112px; height: 89px;">
             </a>
             </p>
         </li>

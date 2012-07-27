@@ -665,6 +665,11 @@ UL {
     margin-left: 26px;
     margin-top: 37px;
 }
+.dc_description_hide{
+    margin-left: 26px;
+    margin-top: 37px;
+    display: none;
+}
 .div_recent_item p{
     clear: both;
 }
@@ -1265,6 +1270,7 @@ div.xbreadcrumbs-border {
 .xbreadcrumbs {
     background: white url('image/bg_portal.png') repeat top;
     width: 100%;
+    height: 100%;
 }
 .xbreadcrumbs LI {
     border-right: 1px solid #CECECE;

@@ -52,8 +52,6 @@ public class Otp extends DSpaceObject
     private TableRow otpRow;
 
 
-    /** Handle, if any */
-    private String handle;
     /** Flag set when data is modified, for events */
     private boolean modified;
 
@@ -75,7 +73,7 @@ public class Otp extends DSpaceObject
 
 
         // Get our Handle if any
-        handle = HandleManager.findHandle(context, this);
+//        handle = HandleManager.findHandle(context, this);
 
         // Cache ourselves
         context.cache(this, row.getIntColumn("otp_id"));
@@ -157,28 +155,6 @@ public class Otp extends DSpaceObject
         TableRow row = DatabaseManager.create(context, "otp");
         Otp c = new Otp(context, row);
         
-        try
-        {
-            c.handle = (handle == null) ?
-                       HandleManager.createHandle(context, c) :
-                       HandleManager.createHandle(context, c, handle);
-        }
-        catch(IllegalStateException ie)
-        {
-            //If an IllegalStateException is thrown, then an existing object is already using this handle
-            //Remove the otp we just created -- as it is incomplete
-            try
-            {
-                if(c!=null)
-                {
-                    c.delete();
-                }
-            } catch(Exception e) { }
-
-            //pass exception on up the chain
-            throw ie;
-        }
-
         return c;
     }
 
@@ -195,9 +171,12 @@ public class Otp extends DSpaceObject
             return null;
         }
         
+        // get all communities that are not children
+        TableRowIterator tri = DatabaseManager.queryTable(context, "otp",
+                "SELECT * FROM otp WHERE is_active = 1 and otp = ?",otp);
+
         // All email addresses are stored as lowercase, so ensure that the email address is lowercased for the lookup 
-        TableRow row = DatabaseManager.findByUnique(context, "otp",
-                "otp", otp.toLowerCase());
+        TableRow row = tri.next();
 
         if (row == null)
         {
@@ -206,17 +185,7 @@ public class Otp extends DSpaceObject
         else
         {
             // First check the cache
-            Otp fromCache = (Otp) context.fromCache(Otp.class, row
-                    .getIntColumn("otp_id"));
-
-            if (fromCache != null)
-            {
-                return fromCache;
-            }
-            else
-            {
-                return new Otp(context, row);
-            }
+            return new Otp(context, row);
         }
     }
 
@@ -282,23 +251,6 @@ public class Otp extends DSpaceObject
     {
         return otpRow.getIntColumn("otp_id");
     }
-
-    /**
-     * @see org.dspace.content.DSpaceObject#getHandle()
-     */
-    public String getHandle()
-    {
-        if(handle == null) {
-        	try {
-				handle = HandleManager.findHandle(this.ourContext, this);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
-			}
-        }
-    	return handle;
-    }
-
 
     /**
      * Update the otp metadata (including logo) to the database.
@@ -473,6 +425,11 @@ public class Otp extends DSpaceObject
 
     @Override
     public int getType() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getHandle() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }
