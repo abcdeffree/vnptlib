@@ -85,7 +85,7 @@ public class OtpServlet extends DSpaceServlet {
                                                             + item.getHandle()
                                                             + "/" + bitstreams[0].getSequenceID()
                                                             + "/" + UIUtil.encodeBitstreamName(bitstreams[0].getName(), Constants.DEFAULT_ENCODING);
-                out.print("Đường dẫn download tài liệu:<a href='"+url+"'>"+url+"</a>");
+                out.print(url);
                 out.flush();
                 context.complete();
             }

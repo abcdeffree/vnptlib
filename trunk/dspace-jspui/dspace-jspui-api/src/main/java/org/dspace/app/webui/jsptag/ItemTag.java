@@ -849,6 +849,7 @@ public class ItemTag extends TagSupport {
                                 if (embargo) {
                                     out.print("&nbsp;&nbsp;-&nbsp;&nbsp;Under Embargo!");
                                 } else {
+                                    
                                     if (bsUrl.indexOf(".xls") > -1
                                             || bsUrl.indexOf(".ods") > -1
                                             || bsUrl.indexOf(".csv") > -1
@@ -866,7 +867,9 @@ public class ItemTag extends TagSupport {
                                             || bsUrl.indexOf(".docx") > -1
                                             || bsUrl.indexOf(".xlsx") > -1
                                             || bsUrl.indexOf(".html") > -1) {
-                                        out.print("<a href=\"#div_preview\" class=\"preview\" rel=\"" + bsUrl + "\">Xem</a>");
+                                        if(bitstreams[k].getSize() < 15728640){
+                                            out.print("<a href=\"#div_preview\" class=\"preview\" rel=\"" + bsUrl + "\">Xem</a>");
+                                        }
                                     }else if (bsUrl.indexOf(".jpg") > -1 || bsUrl.indexOf(".gif") > -1 || bsUrl.indexOf(".png") > -1) {
                                         //FLV, MP4, MP3, AAC
                                         out.print("<a href=\"#div_preview\" class=\"image_preview\" rel=\"" + bsUrl + "\">Xem</a>");

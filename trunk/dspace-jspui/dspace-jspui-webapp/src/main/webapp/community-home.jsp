@@ -73,6 +73,7 @@
     }
 
     ItemCounter ic = new ItemCounter(UIUtil.obtainContext(request));
+    String adventiseNews = ConfigurationManager.readNewsFile(LocaleSupport.getLocalizedMessage(pageContext, "news-adventise.html"));
 %>
 
 <%@page import="org.dspace.app.webui.servlet.MyDSpaceServlet"%>
@@ -222,6 +223,11 @@
                     %>
     </div>
     <dspace:sidebar>
+        <embed height="349" width="240" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" 
+               src="/dspace/image/vnptipcv2.swf" play="true" loop="true" menu="true">
+        <div class="div_box_rightbar">
+                <%= adventiseNews%>
+        </div>
         <% if (editor_button || add_button) // edit button(s)
                 {%>
         <div class="div_box_rightbar">
