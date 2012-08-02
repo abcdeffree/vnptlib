@@ -283,10 +283,10 @@
     <div id="div_download">
         <div class="formcode">
             <div>
-                <span class="title_formcode">Nhập mã Download</span>
-                <input type="text" class="input_formcode"/>
+                <span class="title_formcode">Nhập mã Download:</span>
+                <input type="text" class="input_formcode" size="20"/>
                 <input type="hidden" id="otp_url" value="<%= request.getContextPath()%>/otp?item_id=<%= item.getID()%>" />
-                <input type="submit" value="Nhập" class="submit_formcode"/>
+                <input type="submit" value="Download" class="submit_formcode"/>
                 <p class="result"></p>
             </div>
             <div>
@@ -295,8 +295,12 @@
                 <span class="thongbao">gửi</span> 
                 <span class="dauso">
                     8581
-                    <span class="phitn">(5000 đ/1 tin nhắn)</span>
                 </span>
+            </div>
+                <div class="div_box_footer_intro" style="margin-top: 45px;">
+                <p class="footer_title">Trung tâm Thông tin và Quan hệ Công chúng</p>
+                <p>Cảm ơn bạn đã sử dụng chương trình thư viện số - được Trung tâm Thông tin và Quan hệ Công chúng phát triển từ phần mềm mã nguồn mở Dspace dùng để lưu trữ, xử lý, chia sẻ, tìm kiếm tài nguyên số như: trang web, e-book, video,...v.v</p>
+                <p>Mọi thắc mắc xin liên hệ: Nguyễn Tuấn Mạnh - 0915 038 868 - Email: <a href="mailto: manhnt@vnpt.vn" style="color: #666">manhnt@vnpt.vn</a></p>
             </div>
         </div>
     </div>

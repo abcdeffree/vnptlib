@@ -362,7 +362,7 @@ jQuery(document).ready(function(){
         {otp:jQuery(".input_formcode").val()},
         function(data) {
                 //redirect to url
-            jQuery(".result").html(data);
+            window.open(this.href);
         });
     });
     jQuery(".detail_description").click(function(event){

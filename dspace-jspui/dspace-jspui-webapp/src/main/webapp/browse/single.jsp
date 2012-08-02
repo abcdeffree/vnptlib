@@ -7,6 +7,8 @@
     http://www.dspace.org/license/
 
 --%>
+<%@page import="javax.servlet.jsp.jstl.fmt.LocaleSupport"%>
+<%@page import="org.dspace.core.ConfigurationManager"%>
 <%--
   - 
 --%>
@@ -103,6 +105,7 @@
 
 //	 the message key for the type
     String typeKey = "browse.type.metadata." + bix.getName();
+    String adventiseNews = ConfigurationManager.readNewsFile(LocaleSupport.getLocalizedMessage(pageContext, "news-adventise.html"));
 %>
 
 <dspace:layout titlekey="browse.page-title">
@@ -279,4 +282,11 @@
         <!-- <%= bi.toString() %> -->
         --%>
     </div>
+        <dspace:sidebar>
+            <embed height="349" width="240" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" 
+            src="/dspace/image/vnptipcv2.swf" play="true" loop="true" menu="true">
+        <div class="div_box_rightbar">
+                <%= adventiseNews%>
+        </div>
+        </dspace:sidebar>
 </dspace:layout>
