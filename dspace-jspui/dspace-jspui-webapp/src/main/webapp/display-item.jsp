@@ -173,7 +173,7 @@
         <%}%>
         <div style="clear: both"></div>
         <div class="div_view_comment">
-            <% if (comments.length != 0) {
+            <% if (comments != null && comments.length != 0) {
                     for (int i = 0; i < comments.length; i++) {
                         Comment comment = comments[i];
             %>

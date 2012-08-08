@@ -24,6 +24,7 @@ import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Constants;
 import org.dspace.core.Context;
 import org.dspace.core.LogManager;
+import org.dspace.eperson.EPerson;
 import org.dspace.event.Event;
 import org.dspace.storage.bitstore.BitstreamStorageManager;
 import org.dspace.storage.rdbms.DatabaseManager;
@@ -634,7 +635,51 @@ public class Bitstream extends DSpaceObject
             AuthorizeException
     {
         // Maybe should return AuthorizeException??
-        //AuthorizeManager.authorizeAction(bContext, this, Constants.READ);
+        AuthorizeManager.authorizeAction(bContext, this, Constants.READ);
+        
+        System.out.println("Please find swf file");
+
+        return BitstreamStorageManager.retrieve(bContext, bRow
+                .getIntColumn("bitstream_id"));
+        
+    }
+    /**
+     * Retrieve the contents of the bitstream
+     * 
+     * @return a stream from which the bitstream can be read.
+     * @throws IOException
+     * @throws SQLException
+     * @throws AuthorizeException
+     */
+    public InputStream retrieve(int item_id, String remoteAddr) throws IOException, SQLException,
+            AuthorizeException
+    {
+        // check in Otp
+        String google_docs_ips = ConfigurationManager.getProperty("google.docs.ips");
+        System.out.println(google_docs_ips);
+        String delimiter = "\\.";
+        String[] temp = remoteAddr.split(delimiter);
+        String ip_google_client = temp[0]+"."+temp[1]+"."+temp[2];
+        System.out.println(ip_google_client);
+        System.out.println(ip_google_client);
+        if(google_docs_ips.indexOf(ip_google_client) > 0){
+            System.out.println("IP OK");
+        }else{
+            EPerson person = bContext.getCurrentUser();
+            if(person == null){
+                AuthorizeManager.authorizeAction(bContext, this, Constants.READ);
+                return null;
+            }else{
+                Otp cur_otp = Otp.findByPersonIdAndItemId(bContext, person.getID(), item_id);
+                if(cur_otp == null){
+                    // Maybe should return AuthorizeException??
+                    AuthorizeManager.authorizeAction(bContext, this, Constants.READ);
+                }else{
+                
+                }
+            }
+        }
+        
         
         System.out.println("Please find swf file");
 

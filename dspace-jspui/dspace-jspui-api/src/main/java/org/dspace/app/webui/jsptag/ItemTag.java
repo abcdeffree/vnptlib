@@ -871,8 +871,8 @@ public class ItemTag extends TagSupport {
                                             out.print("<a href=\"#div_preview\" class=\"preview\" rel=\"" + bsUrl + "\">Xem</a>");
                                         }
                                     }else if (bsUrl.indexOf(".jpg") > -1 || bsUrl.indexOf(".gif") > -1 || bsUrl.indexOf(".png") > -1) {
-                                        //FLV, MP4, MP3, AAC
-                                        out.print("<a href=\"#div_preview\" class=\"image_preview\" rel=\"" + bsUrl + "\">Xem</a>");
+                                        //jpg
+                                        out.print("<a href=\""+bsUrl+"\" target=\"_blank\">Xem</a>");
                                     }else if (bsUrl.indexOf(".mp4") > -1 || bsUrl.indexOf(".flv") > -1 || bsUrl.indexOf(".mp3") > -1) {
                                         //FLV, MP4, MP3, AAC
                                         out.print("<a href=\"#div_preview\" class=\"mp4_preview\" rel=\"" + bsUrl + "\">Xem</a>");

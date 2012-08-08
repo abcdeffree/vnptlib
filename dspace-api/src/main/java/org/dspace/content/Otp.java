@@ -188,6 +188,31 @@ public class Otp extends DSpaceObject
             return new Otp(context, row);
         }
     }
+    /**
+     * Find the otp by their email address.
+     * 
+     * @return EPerson, or {@code null} if none such exists.
+     */
+    public static Otp findByPersonIdAndItemId(Context context, int person_id, int item_id)
+            throws SQLException, AuthorizeException
+    {
+        // get all communities that are not children
+        TableRowIterator tri = DatabaseManager.queryTable(context, "otp",
+                "SELECT * FROM otp WHERE person_id = ? and item_id=?",person_id,item_id);
+
+        // All email addresses are stored as lowercase, so ensure that the email address is lowercased for the lookup 
+        TableRow row = tri.next();
+
+        if (row == null)
+        {
+            return null;
+        }
+        else
+        {
+            // First check the cache
+            return new Otp(context, row);
+        }
+    }
 
     /**
      * Get a list of all top-level communities in the system. These are

@@ -10,16 +10,12 @@
 #
 # See org.dspace.core.Email for information on the format of this file.
 #
-Subject: Thông tin phản hồi
+Subject: (IPC-DLibrary) Thông tin download tài liệu
 Charset: UTF-8
-Nội dung:
-<p>
-{6}
-</p>
-<br/>
-<p>Date: {0}</p>
-<p>Email: {1}</p>
-<p>Logged In As: {2}</p>
-<p>Referring Page: {3}</p>
-<p>User Agent: {4}</p>
-<p>Session: {5}</p>
+<p>Xin chào {0},</p>
+<p>IPC-DLibrary chân thành cảm ơn bạn đã download tài liệu: {1}</p>
+{2}
+<p>Bạn cần đăng nhập trên IPC-DLibrary bằng tài khoản của bạn để download theo đường dẫn trên.</p>
+
+<p>Trân trọng ,</p>
+<p>IPC-DLibrary</p>

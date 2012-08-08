@@ -948,7 +948,7 @@ public class Collection extends DSpaceObject
                 "SELECT COUNT(DISTINCT collection_id) AS num FROM collection2item WHERE item_id= ? ",
                 item.getID());
 
-        DatabaseManager.setConstraintDeferred(ourContext, "coll2item_item_fk");
+        //DatabaseManager.setConstraintDeferred(ourContext, "coll2item_item_fk");
         if (row.getLongColumn("num") == 1)
         {
             // Orphan; delete it
@@ -961,7 +961,7 @@ public class Collection extends DSpaceObject
                 "DELETE FROM collection2item WHERE collection_id= ? "+
                 "AND item_id= ? ",
                 getID(), item.getID());
-        DatabaseManager.setConstraintImmediate(ourContext, "coll2item_item_fk");
+        //DatabaseManager.setConstraintImmediate(ourContext, "coll2item_item_fk");
         
         ourContext.addEvent(new Event(Event.REMOVE, Constants.COLLECTION, getID(), Constants.ITEM, item.getID(), item.getHandle()));
     }

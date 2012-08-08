@@ -319,7 +319,7 @@ public class Email
         }
         else
         {
-            message.setSubject(fullSubject);
+            message.setSubject(fullSubject,"UTF-8");
         }
         
         // Add attachments
@@ -332,7 +332,7 @@ public class Email
             }
             else
             {
-                message.setText(fullMessage);
+                message.setText(fullMessage, "UTF-8","html");
             }
         }
         else

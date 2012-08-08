@@ -202,9 +202,12 @@ public class BitstreamServlet extends DSpaceServlet
                 return;
             }
         }
-        
+        String ipAddress = request.getHeader("X_FORWARDED_FOR");
+        String remoteAddr = request.getRemoteAddr();
+        String hostname = request.getRemoteHost(); // hostname
+        System.out.println("remoteAddr=" + remoteAddr +"==="+hostname+"====="+ipAddress);
         // Pipe the bits
-        InputStream is = bitstream.retrieve();
+        InputStream is = bitstream.retrieve(item.getID(),remoteAddr);
      
 		// Set the response MIME type
         response.setContentType(bitstream.getFormat().getMIMEType());
