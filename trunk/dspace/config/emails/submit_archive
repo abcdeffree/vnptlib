@@ -4,18 +4,16 @@
 # {1}  Name of collection
 # {2}  handle 
 #
-Subject: DSpace: Submission Approved and Archived 
+Subject: IPC-DLibrary: Tài liệu được phê duyệt và lưu trữ
+Charset: UTF-8
+<p>Nội dung tài liệu: {0}</p>
 
-You submitted: {0}
+<p>Tới bộ sưu tập: {1}</p>
 
-To collection: {1}
+<p>Tài liệu của bạn đã được phê duyệt và lưu trữ trên IPC-DLibrary.</p>
+<p>Xem tài liệu theo đường dẫn:</p>
+<p>{2}</p>
+<br/>
+<p>Xin cảm ơn!</p>
 
-Your submission has been accepted and archived in DSpace,
-and it has been assigned the following identifier:
-{2}
-
-Please use this identifier when citing your submission.
-
-Many thanks!
-
-DSpace
+<p>IPC-DLibrary</p>

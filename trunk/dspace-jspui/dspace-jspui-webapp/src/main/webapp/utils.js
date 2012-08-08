@@ -358,11 +358,12 @@ jQuery(document).ready(function(){
     jQuery(".submit_formcode").click(function(event){
         event.preventDefault();
         jQuery(".result").html("");
-        jQuery.get(jQuery("#otp_url").val(), 
+        jQuery.get(
+        jQuery("#otp_url").val(), 
         {otp:jQuery(".input_formcode").val()},
         function(data) {
                 //redirect to url
-            window.open(this.href);
+            jQuery(".result").html(data);
         });
     });
     jQuery(".detail_description").click(function(event){

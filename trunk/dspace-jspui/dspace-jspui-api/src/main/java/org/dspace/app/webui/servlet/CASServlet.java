@@ -21,8 +21,10 @@ import org.dspace.authorize.AuthorizeException;
 import org.dspace.core.Context;
 import org.dspace.core.I18nUtil;
 import org.dspace.core.LogManager;
+import org.dspace.core.Utils;
 import org.dspace.eperson.EPerson;
 import org.dspace.storage.rdbms.DatabaseManager;
+import org.dspace.storage.rdbms.TableRow;
 import org.jasig.cas.client.authentication.AttributePrincipal;
 import org.jasig.cas.client.validation.Assertion;
 import org.jasig.cas.client.validation.Cas20ProxyTicketValidator;
@@ -75,12 +77,17 @@ public class CASServlet extends DSpaceServlet {
                     eperson.setRequireCertificate(false);
                     AuthenticationManager.initEPerson(context, request, eperson);
                     eperson.update();
+                    
+
+                    TableRow rd = DatabaseManager.row("EPersonGroup2EPerson");
+                    rd.setColumn("eperson_group_id", 15);
+
+                    // don't set expiration date any more
+                    //            rd.setColumn("expires", getDefaultExpirationDate());
+                    rd.setColumn("eperson_id", eperson.getID());
+                    DatabaseManager.insert(context, rd);
                     context.commit();
                     context.setIgnoreAuthorization(false);
-                    
-                    DatabaseManager.updateQuery(context,
-                    "INSERT INTO EPersonGroup2EPerson (eperson_group_id,eperson_id) VALUES (15,?)",eperson.getID());
-//                    context.setCurrentUser(eperson);
                 }
             } catch (SQLException e) {
                 log.error("cas findByEmail failed");

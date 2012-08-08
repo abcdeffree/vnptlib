@@ -955,13 +955,13 @@ public class Community extends DSpaceObject
             AuthorizeException, IOException
     {
         // Check authorisation
-        AuthorizeManager.authorizeAction(ourContext, this, Constants.REMOVE);
+            AuthorizeManager.authorizeAction(ourContext, this, Constants.REMOVE);
 
         // will be the collection an orphan?
         TableRow trow = DatabaseManager.querySingle(ourContext,
                 "SELECT COUNT(DISTINCT community_id) AS num FROM community2collection WHERE collection_id= ? ",
                 c.getID());
-        DatabaseManager.setConstraintDeferred(ourContext, "comm2coll_collection_fk");
+//        DatabaseManager.setConstraintDeferred(ourContext, "community2collection_collection_id_fkey");
         
         if (trow.getLongColumn("num") == 1)
         {
@@ -977,7 +977,7 @@ public class Community extends DSpaceObject
                 "DELETE FROM community2collection WHERE community_id= ? "+
                 "AND collection_id= ? ", getID(), c.getID());
 
-        DatabaseManager.setConstraintImmediate(ourContext, "comm2coll_collection_fk");
+//        DatabaseManager.setConstraintImmediate(ourContext, "community2collection_collection_id_fkey");
         
         ourContext.addEvent(new Event(Event.REMOVE, Constants.COMMUNITY, getID(), Constants.COLLECTION, c.getID(), c.getHandle()));
     }

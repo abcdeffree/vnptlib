@@ -8,10 +8,10 @@
 #
 # See org.dspace.core.Email for information on the format of this file.
 #
-Subject: DSpace: Registration Notification
-
-A new user has registered on {0} at {1}:
-
-Name:                   {2}
-Email:                  {3}
-Date:                   {4}
+Subject: IPC-DLibrary: Thông báo thành viên mới đăng ký
+Charset: UTF-8
+<p>Một thành viên mới đã đăng ký trên {0} vào lúc {1}:</p>
+<br/>
+<p>Name:                   {2}</p>
+<p>Email:                  {3}</p>
+<p>Date:                   {4}</p>

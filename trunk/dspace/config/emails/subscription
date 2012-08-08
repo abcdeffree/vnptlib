@@ -4,9 +4,10 @@
 # Parameters: {0} is the details of the new collections and items
 # See org.dspace.core.Email for information on the format of this file.
 #
-Subject: DSpace Subscription
-New items are available in the collections you have subscribed to:
+Subject: Thông tin tài liệu mới từ IPC-DLibrary
+Charset: UTF-8
+Các tài liệu mới đang có sẵn trên các bộ sưu tập mà bạn theo dõi:
 
 {0}
 
-DSpace
+IPC-DLibrary
