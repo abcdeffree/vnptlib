@@ -84,13 +84,26 @@
             </tr>
     </table>
   </form>
-                    <form action="<%= request.getContextPath() %>/dspace-admin/news-edit" method="post">
+    <form action="<%= request.getContextPath() %>/dspace-admin/news-edit" method="post">
     <table class="miscTable" align="center">
             <tr>
                 <%-- <td class="evenRowOddCol">Sidebar News</td> --%>
                 <th id="t2" class="evenRowOddCol">Banner quảng cáo</th>
                 <td headers="t2" class="evenRowEvenCol">
                     <input type="hidden" name="position" value="<fmt:message key="news-adventise.html" />" />
+                    <%-- <input type="submit" name="submit_edit" value="Edit..."> --%>
+                    <input type="submit" name="submit_edit" value="<fmt:message key="jsp.dspace-admin.general.edit"/>" />
+                </td>
+            </tr>
+    </table>
+  </form>
+                    <form action="<%= request.getContextPath() %>/dspace-admin/news-edit" method="post">
+    <table class="miscTable" align="center">
+            <tr>
+                <%-- <td class="evenRowOddCol">Sidebar News</td> --%>
+                <th id="t2" class="evenRowOddCol">Chữ chạy</th>
+                <td headers="t2" class="evenRowEvenCol">
+                    <input type="hidden" name="position" value="news-animationtext.html" />
                     <%-- <input type="submit" name="submit_edit" value="Edit..."> --%>
                     <input type="submit" name="submit_edit" value="<fmt:message key="jsp.dspace-admin.general.edit"/>" />
                 </td>
