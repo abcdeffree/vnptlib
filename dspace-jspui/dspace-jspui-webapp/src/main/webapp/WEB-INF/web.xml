@@ -260,6 +260,10 @@
         <servlet-class>org.dspace.app.webui.servlet.OpenSearchServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>cas-client</servlet-name>
+        <servlet-class>org.dspace.app.webui.servlet.CASServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>password-login</servlet-name>
         <servlet-class>org.dspace.app.webui.servlet.PasswordServlet</servlet-class>
     </servlet>
@@ -598,6 +602,14 @@
     <servlet-mapping>
         <servlet-name>create-comment</servlet-name>
         <url-pattern>/comment/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>otp-check</servlet-name>
+        <url-pattern>/otp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cas-client</servlet-name>
+        <url-pattern>/cas-client</url-pattern>
     </servlet-mapping>
     <mime-mapping>
         <extension>ico</extension>

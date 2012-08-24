@@ -840,11 +840,10 @@ public class ItemTag extends TagSupport {
                                 if ("admin".equalsIgnoreCase(isAdmin)) {
                                     out.print("<a href=\""+bsUrl+"\" target=\"_blank\">Quản trị</a>");
                                     out.print("&nbsp;&nbsp;-&nbsp;&nbsp;");
-//                                                        out.print("<a href=\"#div_preview\" class=\"preview\" rel=\""+bsUrl+"\">Preview</a>");
-//                                                    if(embargo){
-//                                                        out.print(" / Under Embargo)!");
-//                                                    }
-
+                                    
+                                }else{
+                                    out.print("<a href=\""+bsUrl+"\" target=\"_blank\">Tải về</a>");
+                                    out.print("&nbsp;&nbsp;-&nbsp;&nbsp;");
                                 }
                                 if (embargo) {
                                     out.print("&nbsp;&nbsp;-&nbsp;&nbsp;Under Embargo!");

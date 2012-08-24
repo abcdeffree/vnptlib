@@ -18,9 +18,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <%@ taglib uri="/WEB-INF/dspace-tags.tld" prefix="dspace" %>
-<%
-String adventiseNews = ConfigurationManager.readNewsFile(LocaleSupport.getLocalizedMessage(pageContext, "news-adventise.html"));
-%>
 <div class="div_box_rightbar">
     <h3><img  class="nav_home_h3" src="<%= request.getContextPath()%>/image/help.png"/>Hỗ trợ từ quản trị</h3>
     <ul>

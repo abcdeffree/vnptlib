@@ -659,8 +659,7 @@ public class Bitstream extends DSpaceObject
         System.out.println(google_docs_ips);
         String delimiter = "\\.";
         String[] temp = remoteAddr.split(delimiter);
-        String ip_google_client = temp[0]+"."+temp[1]+"."+temp[2];
-        System.out.println(ip_google_client);
+        String ip_google_client = temp[0]+"."+temp[1];
         System.out.println(ip_google_client);
         if(google_docs_ips.indexOf(ip_google_client) > 0){
             System.out.println("IP OK");
