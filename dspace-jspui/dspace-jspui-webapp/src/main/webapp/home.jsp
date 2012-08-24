@@ -46,6 +46,7 @@
     String topNews = ConfigurationManager.readNewsFile(LocaleSupport.getLocalizedMessage(pageContext, "news-top.html"));
     String sideNews = ConfigurationManager.readNewsFile(LocaleSupport.getLocalizedMessage(pageContext, "news-side.html"));
     String adventiseNews = ConfigurationManager.readNewsFile(LocaleSupport.getLocalizedMessage(pageContext, "news-adventise.html"));
+    String animationTexts = ConfigurationManager.readNewsFile("news-animationtext.html");
 
     ItemCounter ic = new ItemCounter(UIUtil.obtainContext(request));
 %>
@@ -54,55 +55,7 @@
     <div class="home_marquee">
 	<marquee behavior="scroll" direction="left" width="620" height="30" 
 	scrollamount="2" scrolldelay="20" onmouseover="this.stop()" onmouseout="this.start()">		
-		<img src="http://113.160.32.22/dspace/image/document.png" height="18">
-		<a class="menu_sub2" href="/dspace/handle/123456789/555">
-		<font color="#800000">Radio System Design for Telecommunications</font>
-		</a>&nbsp;&nbsp;
-		<img src="http://113.160.32.22/dspace/image/document.png" height="18">
-		<a class="menu_sub2" href="/dspace/handle/123456789/565">
-		<font color="#800000">M-Commerce Crash Cuorse: The Technology and Business of Next Generation Internet Services</font>
-		</a>
-		&nbsp;		
-		&nbsp;
-		<img src="http://113.160.32.22/dspace/image/document.png" height="18">
-		<a class="menu_sub2" href="/dspace/handle/123456789/566">
-		<font color="#800000">How to build a digital library</font>
-		</a>
-		&nbsp;
-		&nbsp;
-		<img src="http://113.160.32.22/dspace/image/document.png" height="18">
-		<a class="menu_sub2" href="/dspace/handle/123456789/567">
-		<font color="#800000">IT Project +: Study Guide</font>
-		</a>
-		&nbsp;
-		&nbsp;
-		<img src="http://113.160.32.22/dspace/image/document.png" height="18">
-		<a class="menu_sub2" href="/dspace/handle/123456789/559">
-		<font color="#800000">Statistical and Adaptive Signal Processing: Spectral Estimation, Signal Modeling, Adaptive Filtering and Array Processing</font>
-		</a>
-		&nbsp;
-		&nbsp;
-		<img src="http://113.160.32.22/dspace/image/document.png" height="18">
-		<a class="menu_sub2" href="/dspace/handle/123456789/560">
-		<font color="#800000">ATM for Public Networks</font>
-		</a>&nbsp;
-		&nbsp;
-		<a class="menu_sub2" href="/dspace/handle/123456789/562">
-		<font color="#800000">Satellite-Based Cellular Communications</font>
-		</a>&nbsp;
-		&nbsp;
-		<img src="http://113.160.32.22/dspace/image/document.png" height="18">
-		<a class="menu_sub2" href="/dspace/handle/123456789/564">
-		<font color="#800000">M-Commerce Crash Course: The Technology and Business of Next Generation Internet Services</font>
-		</a>&nbsp;&nbsp;
-		<img src="http://113.160.32.22/dspace/image/document.png" height="18">
-		<a class="menu_sub2" href="/dspace/handle/123456789/555">
-		<font color="#800000">Radio System Design for Telecommunications</font>
-		</a>&nbsp;&nbsp;
-		<img src="http://113.160.32.22/dspace/image/document.png" height="18">
-		<a class="menu_sub2" href="/dspace/handle/123456789/550">
-		<font color="#800000">Advanced Digital Signal Processing and Noise Reduction</font>
-		</a>
+		<%=animationTexts%>
 		</marquee>
         </div>
     <div class="div_top_new">
