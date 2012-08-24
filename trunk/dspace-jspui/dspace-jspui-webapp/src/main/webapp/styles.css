@@ -1927,3 +1927,9 @@ ul.browse-alpha li a{
 .folder a:hover{
     color:#0066B3;
 }
+.home_marquee{
+    z-index: 9999;
+    position: absolute;
+    margin-top: -40px;
+    margin-left: 128px;
+}

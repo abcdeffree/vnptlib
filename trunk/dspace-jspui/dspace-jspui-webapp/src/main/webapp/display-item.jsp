@@ -299,7 +299,7 @@
             </div>
                 <div class="div_box_footer_intro" style="margin-top: 45px;">
                 <p class="footer_title">Trung tâm Thông tin và Quan hệ Công chúng</p>
-                <p>Cảm ơn bạn đã sử dụng chương trình thư viện số - được Trung tâm Thông tin và Quan hệ Công chúng phát triển từ phần mềm mã nguồn mở Dspace dùng để lưu trữ, xử lý, chia sẻ, tìm kiếm tài nguyên số như: trang web, e-book, video,...v.v</p>
+                <p>Cảm ơn bạn đã sử dụng chương trình thư viện số IPC D-Library - được Trung tâm Thông tin và Quan hệ Công chúng xây dựng và phát triển.</p>
                 <p>Mọi thắc mắc xin liên hệ: Nguyễn Tuấn Mạnh - 0915 038 868 - Email: <a href="mailto: manhnt@vnpt.vn" style="color: #666">manhnt@vnpt.vn</a></p>
             </div>
         </div>
