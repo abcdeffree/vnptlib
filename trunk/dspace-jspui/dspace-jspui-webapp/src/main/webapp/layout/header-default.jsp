@@ -241,6 +241,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="<%= request.getContextPath()%>/csdl.jsp" class="nav-noibo" target="_blank">
+                            <span>CSDL Online</span>
+                        </a>
+                    </li>
+                    <li>
                         <%
                             if (isAdmin) {
                         %>  
